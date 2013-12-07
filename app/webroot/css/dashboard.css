@@ -1,0 +1,197 @@
+#status-dashboard {
+	font-size: .7em;
+	margin: 10px;
+/*	position: relative;*/
+}
+.status-detail {
+/*	cursor: pointer;*/
+}
+.gettingLate{
+    color: #d60202;
+    
+    /*background: #d60202;*/
+}
+
+/* =Blocks
+-----------------------------------------------------------------------------*/
+.block {
+/*	border: 1px solid #ccc;*/
+/*	float: left;*/
+	width: 100%;
+/*	margin: 0 10px 10px 10px;*/
+	padding: 5px;
+	background: #237799;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+	.block h1 {
+		background: #237799;
+		color: #eee;
+		font-weight: bold;
+		padding: 0px 0px 3px 0px;
+		margin: 0;
+                font-size: 2em;
+                float: left;
+	}
+        .block h1 a{
+		background: #237799;
+		color: #eee;
+		font-weight: bold;
+		padding: 0px 0px 3px 0px;
+		margin: 0;
+                font-size: 15px;
+                text-decoration: none;
+	}
+	.block h1 select {
+		vertical-align: middle;
+	}
+	.block h2 {
+		font-size: 10px;
+		padding: 2px 5px;
+                text-align: right;
+                
+	}
+        .block h2 a {
+		font-size: 10px;
+		padding: 2px 5px;
+                text-align: right;
+                color: #fff;
+	}
+	.block p,
+	.block div {
+		background: #fff;
+	}
+	.block p {
+		padding: 2px 5px;
+	}
+	.block ul, .block li {
+		margin: 0 12px;
+	}
+
+        
+.published_block{
+    border: 1px solid #ccc;
+    float: left;
+    width: 100%;
+    margin: 0 10px 10px 10px;
+    padding: 5px;
+    background: #237799;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+        .published_block h1 {
+		background: #237799;
+		color: #eee;
+		font-weight: bold;
+		padding: 0px 0px 3px 0px;
+		margin: 0;
+                font-size: 2em;
+	}
+        .published_block h1 a{
+		background: #237799;
+		color: #eee;
+		font-weight: bold;
+		padding: 0px 0px 3px 0px;
+		margin: 0;
+                font-size: 1em;
+                text-decoration: none;
+	}
+	.published_block h1 select {
+		vertical-align: middle;
+	}
+	.published_block h2 {
+		font-size: 10px;
+		padding: 2px 5px;
+                text-align: right;
+                
+	}
+        .published_block h2 a {
+		font-size: 10px;
+		padding: 2px 5px;
+                text-align: right;
+                color: #fff;
+	}
+	.published_block p,
+	.published_block div {
+		background: #fff;
+	}
+	.published_block p {
+		padding: 2px 5px;
+	}
+	.published_block ul, .published_block li {
+		margin: 0 12px;
+	}
+/* =Tables
+-----------------------------------------------------------------------------*/
+table {
+	border-collapse: collapse;
+	margin: 0;
+	background: #fff;
+	border:1px solid #ccc;
+	border-right:0;
+	clear: both;
+	color: #333;
+	width: 100%;
+}
+
+table tr th,
+table tr td {
+	text-align: left;
+	border: 1px solid #ccc;
+}
+th {
+	background: #f2f2f2;
+	border:1px solid #bbb;
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+}
+table tr td {
+/*	background: #fff;*/
+	border-right: 1px solid #ccc;
+	padding: 4px;
+	vertical-align: top;
+        
+}
+
+/* =Messages
+-----------------------------------------------------------------------------*/
+.success,
+.success td {
+	background: green;
+	color: #fff;
+}
+.error,
+.error td {
+	background: red;
+	color: #fff;
+}
+
+
+
+.published_block table tr th a {
+    background: url("../img/sorting-bg.png") no-repeat scroll right 3px transparent;
+    text-decoration: none;
+    padding-right: 15px;
+}
+.published_block table tr th a.desc {
+    background: url("../img/sorting-bg.png") no-repeat scroll right -50px transparent;
+    text-decoration: none;
+    padding-right: 15px;
+}
+
+.published_block table tr th a.asc {
+    background: url("../img/sorting-bg.png") no-repeat scroll right -103px transparent;
+    text-decoration: none;
+    padding-right: 15px;
+}
+
+/*
+.legend-up{
+    background: url("../img/arrow-up.png") no-repeat scroll left 8px transparent;
+    padding-left: 20px;
+}
+
+.legend-down{
+    background: url("../img/arrow-down.png") no-repeat scroll left 8px transparent;
+    padding-left: 20px;
+}*/

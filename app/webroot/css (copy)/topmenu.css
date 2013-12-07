@@ -1,0 +1,382 @@
+.footer {
+    color: #FFFFFF;
+    font-size: 11px;
+    padding-bottom: 95px;
+}
+.cprts-cntnr1 {
+    margin: 0 auto;
+}
+.copyrights1 {
+    background-color: #AFAFAF;
+    border-top: 5px solid #AFAFAF;
+    bottom: 0;
+    height: 55px;
+    margin-bottom: 5px;
+    margin-top: -1px;
+    opacity: 1;
+    width: 994px;
+}
+.textdtls {
+    color: #524447;
+    float: left;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 85px;
+    margin-right: 15px;
+    padding-top: 5px;
+}
+.textdtls p {
+    float: left;
+    margin: 0;
+    padding: 0 0 0 20px;
+    width: 100%;
+}
+.input-text-floater {
+    float: left;
+}
+.input-text-floater label input {
+    border: 1px solid #333333;
+    color: #524447;
+    font-size: 11px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 0 0 3px;
+    width: 200px;
+}
+.copyrights2 input {
+    background: url("../img/redbutton.png") no-repeat scroll 0 0 transparent;
+    border: 0 none;
+    color: #000000;
+    float: left;
+    font-size: 11px;
+    font-weight: bold;
+    height: 26px;
+    margin: 0 0 0 15px;
+    padding: 0;
+    width: 65px;
+}
+.responsetext {
+    color: #FF0000;
+    float: left;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    padding: 7px 0 0 5px;
+}
+.rightdeals {
+    background: url("../img/rightdealscolor.jpg") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    height: 45px;
+    line-height: 45px;
+    margin: 0 auto;
+    padding-left: 15px;
+    width: 254px;
+}
+.rightdeals1 {
+    background: url("../img/rightdealscolor1.jpg") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    height: 45px;
+    line-height: 45px;
+    margin: 0 auto;
+    padding-left: 15px;
+    width: 254px;
+}
+.rightdeals2 {
+    background: url("../img/rightdealscolor2.jpg") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    height: 45px;
+    line-height: 45px;
+    margin: 0 auto;
+    padding-left: 15px;
+    width: 254px;
+}
+.rightdeals3 {
+    background: none repeat scroll 0 0 #81BF43;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    margin: 0 auto 5px;
+    padding-left: 15px;
+    width: 240px;
+}
+.dealsmore {
+    color: #0381E1;
+    cursor: pointer;
+    float: right;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    margin-bottom: 15px;
+    padding-left: 100px;
+    width: 80px;
+}
+.wrapper .logo1 {
+    float: left;
+    height: 47px;
+    line-height: 47px;
+    width: 328px;
+}
+.wrapper .sign {
+    color: #FFFFFF;
+    float: left;
+    text-align: right;
+    width: 650px;
+}
+.wrapper .sign ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.wrapper .sign ul li {
+    display: inline;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+.facebook {
+    float: left;
+    padding-right: 10px;
+    width: 60px;
+}
+.sign span {
+    color: #FFFFFF;
+    height: 52px;
+    line-height: 52px;
+    text-align: right;
+}
+.sign a {
+    color: #FFFFFF;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+}
+.sign a:hover {
+    color: #FFFFFF;
+    height: 40px;
+    line-height: 40px;
+    text-align: right;
+    text-decoration: underline;
+}
+.wrapper1 {
+    background: none repeat scroll 0 0 #000000;
+    border-top: 1px solid #9D8E89;
+    clear: both;
+    margin: 0 auto;
+    width: 100%;
+}
+.wrapper2 {
+    margin: 0 auto;
+    width: 980px;
+}
+.wrapper2 .nav {
+    color: #D2D3D5;
+    float: left;
+    font-family: Verdana,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    width: 600px;
+}
+.wrapper3 {
+    color: #FFFFFF;
+    float: left;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 20px;
+    padding-right: 5px;
+    padding-top: 12px;
+    text-align: left;
+    width: 204px;
+}
+.wrapper3 .btn-slide .slct-city-span a {
+    background: url("../img/downarrow-newui.jpg") no-repeat scroll right center transparent;
+    color: #000000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 15px;
+    padding-right: 20px;
+    text-decoration: none;
+}
+.wrapper3 .active .slct-city-span a {
+    background: url("../img/arrow_newui.jpg") no-repeat scroll right center transparent;
+    color: #000000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 15px;
+    padding-right: 20px;
+    text-decoration: none;
+}
+.wrapper4 {
+    border-left: 1px dotted #FFFFFF;
+    color: #FFFFFF;
+    float: left;
+    margin-top: 5px;
+    padding-left: 8px;
+    text-align: center;
+    width: 200px;
+}
+.wrapper4 a {
+    color: #FFFFFF;
+    float: left;
+    text-align: center;
+    text-decoration: none;
+}
+.wrapper4 a:hover {
+    color: #FFFFFF;
+    float: left;
+    text-align: center;
+    text-decoration: underline;
+}
+.wrapper4 a span {
+    color: #F1E30A;
+    margin: 0;
+    padding: 0;
+}
+.cartimage {
+    float: right;
+    height: 52px;
+    line-height: 52px;
+}
+#imenus0 .imeam span, #imenus0 .imeamj span {
+    background-position: left top;
+    background-repeat: no-repeat;
+    height: 9px;
+    left: -15px;
+    top: 0;
+    width: 16px;
+}
+#imenus0 li:hover .imeam span, #imenus0 li a.iactive .imeamj span {
+    background-position: left top;
+    background-repeat: no-repeat;
+    color: #F1E30A;
+}
+#imenus0 ul .imeas span, #imenus0 ul .imeasj span {
+    background-image: url("sample2_sub_arrow.gif");
+    background-position: left top;
+    background-repeat: no-repeat;
+    height: 13px;
+    top: 0;
+    width: 10px;
+}
+#imenus0 ul li:hover .imeas span, #imenus0 ul li a.iactive .imeasj span {
+    background-image: url("sample2_sub_arrow.gif");
+    background-position: left top;
+    background-repeat: no-repeat;
+}
+#imouter0 {
+    /*padding: 0;*/
+}
+#imenus0 li ul {
+    background-color: #4B4B4D;
+    border-width: 0;
+    opacity: 0.95;
+    padding: 5px;
+    z-index: -999;
+}
+#imenus0 li a, #imenus0 .imctitle {
+    color: #000000;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+#imenus0 a:hover {
+    background: none repeat scroll 0 0 #333333;
+    color: #F1E30A;
+    text-decoration: underline;
+}
+.imsc li a {
+    background: none repeat scroll 0 0 transparent;
+}
+#imenus0 li:hover > a {
+    color: #F1E30A;
+}
+#imenus0 li a.ihover, .imde imenus0 a:hover {
+    background: none repeat scroll 0 0 #666666;
+    color: #F1E30A;
+}
+#imenus0 li a.iactive {
+    text-decoration: underline;
+}
+#imenus0 ul a, #imenus0 .imsubc li .imctitle {
+    border-bottom: 0 dotted #000000;
+    color: #FFFFFF;
+    font-size: 11px;
+    font-weight: normal;
+    padding: 2px;
+    text-align: center;
+    text-decoration: none;
+}
+#imenus0 ul li:hover > a {
+    background: none repeat scroll 0 0 #333333;
+    color: #F1E30A;
+}
+#imenus0 ul li a.ihover {
+    background: none repeat scroll 0 0 #333333;
+    color: #F1E30A;
+}
+#imenus0 ul li a.iactive {
+    color: #F1E30A;
+    text-decoration: underline;
+}
+.fotternew {
+    float: left;
+    width: 980px;
+}
+.fotternew1 {
+    float: left;
+    padding: 0 10px;
+    width: 740px;
+}
+.fotternew1 a {
+    border-right: 1px dotted #CCCCCC;
+    color: #FFFFFF;
+    padding: 0 5px;
+}
+.fotternew1 a:hover {
+    color: #FFFFFF;
+}
+.fotternew2 {
+    color: #FFFFFF;
+    float: left;
+    padding: 0 5px;
+    width: 210px;
+}
+.fotternew2 a {
+    border-right: 1px dotted #CCCCCC;
+    color: #FFFFFF;
+    padding: 0 5px;
+}
+.fotternew2 a:hover {
+    border-right: 1px dotted #CCCCCC;
+    color: #FFFFFF;
+    padding: 0 5px;
+}
+.fotternew3 {
+    float: left;
+    font-size: 9px;
+    margin-top: 10px;
+    padding-left: 15px;
+    width: 960px;
+}
+.fotternew3 span {
+    margin: 0;
+    padding: 0 4px;
+    width: 15px;
+}
+.fotternew3 a {
+    color: #FFFFFF;
+    font-size: 9px;
+}
+.fotternew3 a:hover {
+    color: #FFFFFF;
+    font-size: 9px;
+}
