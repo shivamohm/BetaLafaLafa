@@ -29,16 +29,12 @@ $cakeDescription = __d('cake_dev', 'LafaLafa');
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
-		#echo $this->Html->css('/Usermgmt/css/umstyle'); 
-		#echo $this->Html->css('cake.generic');
-
+		
 		echo $this -> Html -> css('cake.generic') . "\n";
 		echo $this -> Html -> css('style') . "\n";
-		echo $this -> Html -> css('/usermgmt/css/umstyle') . "\n";
-		echo $this -> Html -> css('content') . "\n";
-		#echo $this -> Html -> css('tipTip') . "\n";
-		#echo $this -> Html -> css('/faceboxcss/jquery.fancybox-1.3.4.css') . "\n";
-                
+		
+		#echo $this -> Html -> css('content') . "\n";
+		       
                 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -52,12 +48,20 @@ $cakeDescription = __d('cake_dev', 'LafaLafa');
 	<div id="container">
 		<div id="header">
 			<h1><?php #echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-			<?php echo $this -> Html -> link($this -> Html -> image('brix-logo.gif', array('alt' => 'Brix','height'=> '59px','width'=>'179px','border' => '0')), '/dashboard/', array('escape' => false, 'id'=>'logo'));?>
+			<?php echo $this -> Html -> link($this -> Html -> image('brix-logo.gif', array('alt' => 'Brix','height'=> '59px','width'=>'179px','border' => '0')), '/pages/', array('escape' => false, 'id'=>'logo'));?>
 			<section class="user-login-wrp">
 					<?php #echo $this->UserAuth->getUserId(); ?>
 			</section>
 		</div>
+					
+		<div class="actions">
+			<h3>Related actions</h3>
+			<ul>
+			<?php echo $this->fetch('sidebar'); ?>
+			</ul>
+		</div>
 		<div id="content">
+		
 			<?php echo $this->Session->flash(); ?>
 			<?php echo $this->fetch('content'); ?>
 		</div>
