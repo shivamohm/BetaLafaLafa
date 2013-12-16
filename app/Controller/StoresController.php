@@ -56,15 +56,9 @@ class StoresController extends AppController {
 			}
 		}
 		$brands = $this->Store->Brand->find('list');
-		$categories = $this->Store->Category->find('list');
+		#$categories = $this->Store->Category->find('list');
+		$categories = $this->Store->Category->generateTreeList(null, null, null, '--');
 		
-		#$categories = $this->Store->Category->ParentCategory->find('list', array('conditions' => array('parent_id' => 0,'status' => 1) ));
-		#$subcategories = $this->Store->Category->ParentCategory->find('list', array('conditions' => array('parent_id !=' => 0,'status' => 1) ));
-		
-		#$catAll = $this->Store->Category->find('all', array('recursive' => '-1', 'fields' => array('id', 'name', 'parent_id'), 'conditions' => array('status' => 1)));
-		#$subcategories = $this->Store->Category->ParentCategory->find('list', array('conditions' => array('parent_id' => 1,'status' => 1) ));
-		
-		#$this->set(compact('brands', 'categories', 'subcategories', 'catAll'));
 		$this->set(compact('brands', 'categories'));
 		
 	}
@@ -92,7 +86,8 @@ class StoresController extends AppController {
 			$this->request->data = $this->Store->find('first', $options);
 		}
 		$brands = $this->Store->Brand->find('list');
-		$categories = $this->Store->Category->find('list');
+		#$categories = $this->Store->Category->find('list');
+		$categories = $this->Store->Category->generateTreeList(null, null, null, '--');
 		$this->set(compact('brands', 'categories'));
 	}
 

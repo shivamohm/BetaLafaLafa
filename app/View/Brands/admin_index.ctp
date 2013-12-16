@@ -16,14 +16,9 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<!--th><?php echo $this->Paginator->sort('image'); ?></th-->
 			<th><?php echo $this->Paginator->sort('shortdesc'); ?></th>
 			<th><?php echo $this->Paginator->sort('status'); ?></th>
 			<th><?php echo $this->Paginator->sort('noofclick'); ?></th>
-			<!--th><?php echo $this->Paginator->sort('createdby'); ?></th>
-			<th><?php echo $this->Paginator->sort('createddate'); ?></th>
-			<th><?php echo $this->Paginator->sort('modifiedby'); ?></th>
-			<th><?php echo $this->Paginator->sort('modifieddate'); ?></th-->
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($brands as $brand): ?>
@@ -32,7 +27,7 @@
 		<td><?php echo h($brand['Brand']['name']); ?>&nbsp;</td>
 		
 		<td><?php echo h($brand['Brand']['shortdesc']); ?>&nbsp;</td>
-		<td><?php echo h($brand['Brand']['status']); ?>&nbsp;</td>
+                <td><?php if($brand['Brand']['status'] == 1){ echo "Active";}else{echo "In-Active";} ?>&nbsp;</td>
 		<td><?php echo h($brand['Brand']['noofclick']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $brand['Brand']['id'])); ?>

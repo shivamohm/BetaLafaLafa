@@ -33,12 +33,12 @@
 		</dd>
 		<dt><?php echo __('Shortdesc'); ?></dt>
 		<dd>
-			<?php echo h($brand['Brand']['shortdesc']); ?>
+                        <?php echo h($brand['Brand']['shortdesc']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Status'); ?></dt>
 		<dd>
-			<?php echo h($brand['Brand']['status']); ?>
+			<?php if($brand['Brand']['status'] ==1){ echo "Active"; }else{ echo "In-Active";} #echo h($brand['Brand']['status']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Noofclick'); ?></dt>

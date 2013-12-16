@@ -34,7 +34,7 @@
 		<td><?php echo h($store['Store']['affiliatesurl']); ?>&nbsp;</td>
 		<td><?php echo h($store['Store']['storedesc']); ?>&nbsp;</td>
 		
-		<td><?php echo h($store['Store']['status']); ?>&nbsp;</td>
+		<td><?php if($store['Store']['status']==1){ echo "Active"; }elseif($store['Store']['status']==0){ echo "In-Active";} ?>&nbsp;</td>
 		<td><?php echo h($store['Store']['noofclick']); ?>&nbsp;</td>
 		
 		<td class="actions">

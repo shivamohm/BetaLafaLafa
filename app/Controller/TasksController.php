@@ -14,7 +14,7 @@ class TasksController extends AppController {
 		}
         $this->paginate = array('conditions' => $finalCond, 'order' => $ord);
         
-        #$this->paginate = array("order" => $ord);
+                #$this->paginate = array("order" => $ord);
 		#$this->set('tasks', $this->Task->find('all',  array('order' => array('id DESC') ))); 
 		$this->set('tasks', $this->paginate());
 	}

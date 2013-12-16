@@ -37,6 +37,7 @@
 			
 		</tr>
 	<?php else: ?>
+                
 	<?php foreach ($tasks as $task): ?>
 		<tr>
 			<td><input type="checkbox" name="chk1[]" id="chk1[]" value="lksjdsadsad"  > </td>

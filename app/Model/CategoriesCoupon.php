@@ -1,61 +1,22 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Category Model
+ * CategoriesCoupon Model
  *
- * @property Category $ParentCategory
- * @property Category $ChildCategory
+ * @property Coupon $Coupon
+ * @property Category $Category
+ * @property CategoriesCoupon $ParentCategoriesCoupon
+ * @property CategoriesCoupon $ChildCategoriesCoupon
  */
-class Category extends AppModel {
+class CategoriesCoupon extends AppModel {
 
 /**
  * Validation rules
  *
  * @var array
  */
-	public $actsAs = array('Tree');
 	public $validate = array(
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-			'isUnique' => array(
-                            'rule' => 'isUnique',
-                            'allowEmpty'=> false,
-                            'required' => true,
-                            'message' => 'This Brand Name already exists. Please enter a Brand Name'
-              ),
-		),
-		#'parent_id' => array(
-		#	'numeric' => array(
-		#		'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-		#	),
-		#),
-		
-		'image' => array(
-                    'extension' => array(
-                        'rule' => array('extension', array('png', 'jpg','jpeg','gif')),
-                        'required' => false,
-                        'allowEmpty' => true,
-                        'message' => 'Images must be in PNG, JPG,JPEG,GIF format'
-                    ),
-                    'size' => array(
-                        'rule' => array('fileSize', '<', '2MB'),
-                        'message' => 'Images must be no larger than 2MB'
-                    )
-		),
-		
-		'status' => array(
+		'coupon_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -65,7 +26,26 @@ class Category extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		
+		'category_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'parent_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -76,8 +56,22 @@ class Category extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'ParentCategory' => array(
+		'Coupon' => array(
+			'className' => 'Coupon',
+			'foreignKey' => 'coupon_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Category' => array(
 			'className' => 'Category',
+			'foreignKey' => 'category_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'ParentCategoriesCoupon' => array(
+			'className' => 'CategoriesCoupon',
 			'foreignKey' => 'parent_id',
 			'conditions' => '',
 			'fields' => '',
@@ -91,8 +85,8 @@ class Category extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'ChildCategory' => array(
-			'className' => 'Category',
+		'ChildCategoriesCoupon' => array(
+			'className' => 'CategoriesCoupon',
 			'foreignKey' => 'parent_id',
 			'dependent' => false,
 			'conditions' => '',

@@ -8,10 +8,8 @@
 	<li><?php echo $this->Html->link(__('New Brand'), array('controller' => 'brands', 'action' => 'admin_add')); ?> </li>
 	<li><?php echo $this->Html->link(__('List Stores'), array('controller' => 'stores', 'action' => 'admin_index')); ?> </li>
 	<li><?php echo $this->Html->link(__('New Store'), array('controller' => 'stores', 'action' => 'admin_add')); ?> </li>
-
-		<li><?php echo $this->Html->link(__('New Category'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Categories'), array('controller' => 'categories', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Parent Category'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
+        
+	<!--li><?php echo $this->Html->link(__('New Parent Category'), array('controller' => 'categories', 'action' => 'add')); ?> </li-->
 	</ul>
 </div>
 <div class="categories index">
@@ -21,7 +19,7 @@
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
 			<th><?php echo $this->Paginator->sort('parent_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('image'); ?></th>
+			
 			<th><?php echo $this->Paginator->sort('shortdesc'); ?></th>
 			<th><?php echo $this->Paginator->sort('noofclick'); ?></th>
 			<th><?php echo $this->Paginator->sort('status'); ?></th>
@@ -34,10 +32,10 @@
 		<td>
 			<?php echo $this->Html->link($category['ParentCategory']['name'], array('controller' => 'categories', 'action' => 'view', $category['ParentCategory']['id'])); ?>
 		</td>
-		<td><?php echo h($category['Category']['image']); ?>&nbsp;</td>
+		
 		<td><?php echo h($category['Category']['shortdesc']); ?>&nbsp;</td>
 		<td><?php echo h($category['Category']['noofclick']); ?>&nbsp;</td>
-		<td><?php echo h($category['Category']['status']); ?>&nbsp;</td>
+		<td><?php if($category['Category']['status'] == 1){ echo "Active";}else if($category['Category']['status']==0){ echo "In-Active";} ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $category['Category']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $category['Category']['id'])); ?>

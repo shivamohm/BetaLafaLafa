@@ -31,17 +31,18 @@
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
-		#echo $this -> Html -> css('cake.generic') . "\n";
+		
 		echo $this -> Html -> css(array('admin_cake.generic')) . "\n";
-		#echo $this -> Html -> css('style') . "\n";
 		echo $this -> Html -> css(array('admin_style')) . "\n";
-		#echo $this -> Html -> css('/usermgmt/css/umstyle') . "\n";
 		echo $this -> Html -> css(array('admin_content')) . "\n";
+		
 		
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 		echo $this -> Html -> script('jquery.min') . "\n";
+		echo $this -> Html -> script('jquery.validate.min') . "\n";
+		
 		
 	?>
 </head>
