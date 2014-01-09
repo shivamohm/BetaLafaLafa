@@ -28,6 +28,7 @@
 		<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Category",true),"/admin/categories") ?></div>
 		<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Store",true),"/admin/stores") ?></div>
 		<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Coupons",true),"/admin/coupons") ?></div>
+		<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Cashback",true),"/admin/cashbacks") ?></div>
 	
 	<!--div style="float:left;padding-left:5px"><?php echo $this->Html->link(__("Add User",true),"/addUser") ?></div>
 	<div style="float:left;padding-left:5px"><?php echo $this->Html->link(__("All Users",true),"/allUsers") ?></div>

@@ -16,96 +16,216 @@ class Coupon extends AppModel {
         #$filename	=	TMP . 'uploads' . DS . 'coupon' . DS . $filename;
         $handle		=	fopen($filename, "r");
         $header		=	fgetcsv($handle);
-        #$header		=	array( '0'=>'category_id','1'=>'subcategory_id','2'=>'brand_id','3'=>'store','4'=>'coupon_code','5'=>'name','6'=>'desc','7'=>'start date','8'=>'end_date','9'=>'link');
-        $header		=	array( '0'=>'coupon_code','1'=>'name','2'=>'desc','3'=>'start_date','4'=>'end_date','5'=>'link','6'=>'store','7'=>'brand_id','8'=>'category_id','9'=>'subcategory_id');
+        #$header		=	array( '0'=>'category_id','1'=>'subcategory_id','2'=>'brand_id','3'=>'store','4'=>'coupon_code','5'=>'name','6'=>'desc','7'=>'start date','8'=>'end_date','9'=>'link'); 
+        $header		=	array( '0'=>'coupon_code','1'=>'name','2'=>'desc','3'=>'start_date','4'=>'end_date','5'=>'link','6'=>'store','7'=>'brand','8'=>'category','9'=>'subcategory','10'=>'subsubcategory','11'=>'except_category','12'=>'coupon_tag','13'=>'pricerule','14'=>'reviews','15'=>'affiliate', '16'=>'coupon_type' );
         $return		=	array(  'messages' => array(), 'errors' => array(), );
-        $i			=	1;
+        $i		=	0;
+        $return		=	array(  'messages' => array(), 'errors' => array(), );
         
         while (($row = fgetcsv($handle, 1000, ',')) !== FALSE) {
             
+            if(count($row) < 16 ){
+                return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('CSV file currupted. Please you can create new csv file then import here'), true)), );
+            }
+            if($row[1] == ""){
+                return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Coupon Name can not be NUll for Row %d failed to save.',$i), true)), );
+            }
+            
             $data = array();
-
-            #if($row[0] !=""){
-            if($row[9] !=""){
-                    $AffiliateData	=	trim($row[9]);
-
+            
+            if($row[15] !=""){
+                    $AffiliateData	=	trim($row[15]);
             }else{  $AffiliateData = "";}
+            
+             if($row[10] !=""){
+                    $subSubCategory	=	trim($row[10]);
+            }else{  $subSubCategory = "";}
+            
+            
+            if($row[9] !=""){
+                    $subCategory	=	trim($row[9]);
+            }else{  $subCategory = "";}
+            
             if($row[8] !=""){
                     $categoryData	=	trim($row[8]);
-
             }else{  $categoryData = "";}
 
-            #if($row[2] !=""){
             if($row[7] !=""){
                     $brandData	=	trim($row[7]);
-
             }else{  $brandData = "";}
 
             if($row[6] !=""){
                     $storeData	=	trim($row[6]);
-
             }else{  $storeData = ""; }
+            
+            if($categoryData !=""){
+                   
+                   $expCat =   explode("|",$categoryData);
+                   
+                    if($subCategory !=""){
+                        $SubCat =   explode("|",$subCategory);
+                    }else{  $SubCat = "";  }
+                    
+                    if($subSubCategory !=""){
+                        $SubSubCategory =   explode("|",$subSubCategory);
+                    }else{ $SubSubCategory = "";}
+                    
+                    foreach($expCat as $keyC=> $expCats){
+                        $categoryData   =   "";
+                        $categoryData   =   $expCats;
+                        $categoryData	=   $this->categoryMatch($categoryData);
+                        
+                        if($categoryData !=""){
+                            $categoryCount  = $this->Category->find('count', array('conditions' => array('Category.name' => trim($categoryData), 'Category.parent_id' => '0') ));
+                            $categoryQuery  = $this->Category->find('list', array( 'fields' => array('id'),'conditions' => array('name' => trim($categoryData), 'Category.parent_id' => '0') ));
+                            
+                            if($categoryCount == 0){
+                                return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('Category Name  '.$categoryData. ' does not match for Row %d failed to save.',$i), true)), );
+                            }
+                            if(!empty($categoryCount)){
+                               foreach($categoryQuery as $catKey=>$value){
+                                       $categoryQuery[$catKey] =   $value;
+                               }
+                               $CategoryId[] = $categoryQuery[$catKey];
+                           }
+                        }
+                   }
+                   
+                    $cateCoupon=   $CategoryId;
+                    if(is_array($SubCat)){
+                        if(count($CategoryId) == count($SubCat)){
+                            
+                            foreach($SubCat as $keySUb=>$keySUbValue){
+                                
+                                $subCatNameAll   =    trim($keySUbValue);
+                                $mainCateId      =   "";
+                                $mainCateId      =   $CategoryId[$keySUb];
+                                if($subCatNameAll){
+                                    $expSubCatNameAll  =   explode("-",$subCatNameAll);
+                                    
+                                    foreach($expSubCatNameAll as $expSubCatNameAllKay=>$expSubCatNameAllValue){
+                                        
+                                        $subCatName  =   trim($expSubCatNameAllValue);
+                                        $subCategoryCount = $this->Category->find('count', array('conditions' => array('Category.name' => $subCatName, 'Category.parent_id' => $mainCateId) ));
+                                        $subCategoryQuery = $this->Category->find('list', array( 'fields' => array('id'),'conditions' => array('name' => $subCatName, 'Category.parent_id' => $mainCateId) ));
+                                        
+                                        if($subCategoryCount == 0){
+                                          return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('Sub Category Name  '.$subCatName. ' does not match for Row %d failed to save.',$i), true)), );
+                                        }
+                                      
+                                        if(!empty($subCategoryCount)){
+                                            foreach($subCategoryQuery as $subCategoryQueryKey=>$subCategoryQueryValue){
+                                                $subCategoryQuery[$subCategoryQueryKey] =   $subCategoryQueryValue;
+                                            }
+                                            $subCategoryId[] = $subCategoryQuery[$subCategoryQueryKey];
+                                        }
+                                    }
+                                }
+                          } 
+                          $cateCoupon = array_merge($cateCoupon, $subCategoryId);
+                     }else{ 
+                         return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('Category Name  and Sub Categoey  does not match for Row %d failed to save.',$i), true)), );
+                     }
+                   }
+                   
+                    if(is_array($SubSubCategory)){
+                        
+                        foreach($SubSubCategory as $keySubSUb=>$keySubSubValue){
+                            
+                            $subSubCatNameAll  =   trim($keySubSubValue);
+                            $mainSubCategoryId =   "";
+                            $mainSubCategoryId =   $subCategoryId[$keySubSUb];
+                            
+                            $expSubSubCatNameAll  =   explode("-",$subSubCatNameAll);
+                            
+                            foreach($expSubSubCatNameAll as $expSubSubCatNameAllKay=>$expSubSubCatNameAllValue){
+                                if($expSubSubCatNameAllValue){
+                                    $subSubCatName       =  trim($expSubSubCatNameAllValue);
+                                    $subSubCategoryCount = $this->Category->find('count', array('conditions' => array('Category.name' => $subSubCatName, 'Category.parent_id' => $mainSubCategoryId) ));
+                                    $subSubCategoryQuery = $this->Category->find('list', array( 'fields' => array('id'),'conditions' => array('name' => $subSubCatName, 'Category.parent_id' => $mainSubCategoryId) ));
+                                    
+                                    if($subSubCategoryCount == 0){
+                                        return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('Sub Sub Category Name  '.$subSubCatName. ' does not match for Row %d failed to save.',$i), true)), );
+                                    }
+                                    if(!empty($subSubCategoryCount)){
+                                        foreach($subSubCategoryQuery as $subSubCategoryQueryKey=>$subSubCategoryQueryValue){
+                                            $subSubCategoryQuery[$subSubCategoryQueryKey] =   $subSubCategoryQueryValue;
+                                        }
+                                        $subSubCategoryId[] = $subSubCategoryQuery[$subSubCategoryQueryKey];
+                                    }
+                               }
+                           }
+                       }
+                      
+                        $cateCoupon = array_merge($cateCoupon, $subSubCategoryId);
+                   }
+            }
 
-
+            $CategoryId =$subCategoryId= $subSubCategoryId="";
+             
             foreach ($header as $k=>$head) {
                 $head	=	trim($head);
-                $data['Coupon'][$head]=(isset($row[$k])) ? $row[$k] : '';
+                $data['Coupon'][$head]  =   (isset($row[$k])) ? $row[$k] : '';
             }
-           # pr($data);
-            if($data['Coupon']){
-                
-                if($data['Coupon']['start_date'] != ""){
-                    $stDate    =   date('Y-m-d H:m:s',strtotime(trim($data['Coupon']['start_date'])));
+            $data['Category']['Category']= $cateCoupon;
+            $dataA[]  =   $data;
+            $i++;
+            #pr($row);
+           
+        }
+      
+        /***************************Loop**********************************************/
+        
+        
+       
+        $categoryData = $subCategory =$brandData=  $storeData= $AffiliateData="";
+        foreach($dataA as $key=>$couponsData){
+            
+           
+            $categoryData       =   $couponsData['Coupon']['category'];
+            $subCategory        =   $couponsData['Coupon']['subcategory'];
+            $subSubCategory     =   $couponsData['Coupon']['subsubcategory'];
+            $brandData          =   $couponsData['Coupon']['brand'];
+            $storeData          =   $couponsData['Coupon']['store'];
+            $AffiliateData      =   $couponsData['Coupon']['affiliate'];
+            
+            if($couponsData['Coupon']['start_date'] != ""){
+                    $stDate    =   date('Y-m-d H:m:s',strtotime(trim($couponsData['Coupon']['start_date'])));
                 }else{
                     $stDate    =   "0000-00-00 00:00:00";
                 }
-                if($data['Coupon']['end_date'] != ""){
-                    $endDate    =   date('Y-m-d H:m:s',strtotime(trim($data['Coupon']['end_date'])));
+                
+                if($couponsData['Coupon']['end_date'] != ""){
+                     $endDate    =   date('Y-m-d H:m:s',strtotime(trim($couponsData['Coupon']['end_date'])));
                 }else{
                     $endDate    =   "0000-00-00 00:00:00";
                 }
-                $dataCou['Coupon']['coupon_code']	=	trim($data['Coupon']['coupon_code']);
-                $dataCou['Coupon']['name']		=	trim($data['Coupon']['name']);
-                $dataCou['Coupon']['desc']		=	trim($data['Coupon']['desc']);
+                
+                
+                $dataCou['Coupon']['coupon_code']	=	trim($couponsData['Coupon']['coupon_code']);
+                $dataCou['Coupon']['name']		=	trim($couponsData['Coupon']['name']);
+                  
+                $dataCou['Coupon']['pricerule']		=	trim($couponsData['Coupon']['pricerule']);
+                $dataCou['Coupon']['reviews']		=	trim($couponsData['Coupon']['reviews']);
+                $dataCou['Coupon']['coupon_tag']	=	trim($couponsData['Coupon']['coupon_tag']);
+                $dataCou['Coupon']['coupontype']	=	trim($couponsData['Coupon']['coupon_type']);
+                $dataCou['Coupon']['except_category']	=	trim($couponsData['Coupon']['except_category']);
+                $dataCou['Coupon']['desc']		=	trim($couponsData['Coupon']['desc']);
                 $dataCou['Coupon']['start_date']	=	$stDate;
                 $dataCou['Coupon']['end_date']		=       $endDate;
-                $dataCou['Coupon']['link']		=	trim($data['Coupon']['link']);
+                $dataCou['Coupon']['link']		=	trim($couponsData['Coupon']['link']);
                 $dataCou['Coupon']['createby']		=	'';#$this->UserAuth->getGroupName();
                 $dataCou['Coupon']['status']		=	1;
                 $dataCou['Coupon']['createddate']	=	date('Y-m-d h:m:s');
                 
-                /******************************Category Save************************************************/
-                $CategoryInsId      =   "";
-		if($categoryData !=""){
-                    $categoryData	= $this->categoryMatch($categoryData);
-                    if($categoryData !=""){
-                        $categoryQuery 	= $this->Category->ParentCategory->find('list', array( 'fields' => array('id'),'conditions' => array('name' => $categoryData) ));
-                        $categoryCount = $this->Category->find('count', array('conditions' => array('Category.name' => $categoryData) ));
-
-                        if(!empty($categoryCount)){
-                                foreach($categoryQuery as $catKey=>$value){
-                                        $categoryQuery[$catKey] =	$value;
-                                }
-                                $CategoryInsId = $categoryQuery[$catKey];
-
-                        }else{
-
-                            App::uses('Category', 'Model');
-                            $categoryAdd = new Category();
-                            $dataCategory['Category']['name']		=	$categoryData;
-                            $dataCategory['Category']['parent_id']	=	"0";
-                            $dataCategory['Category']['shortdesc']	=	$categoryData;
-                            $dataCategory['Category']['status']		=       1;
-                            #$dataCategory['Category']['createddate']   =	"";
-
-                            $categoryAdd->save($dataCategory);
-                            $CategoryInsId  =	$categoryAdd->getLastInsertID();
-                        }
-                   
-                    }
-                } $dataCou['Category']['Category']		=	$CategoryInsId;
-                /******************************Category Save************************************************/
-                /******************************Brand Save************************************************/
+              
+               /******************************Category Save************************************************/
+               
+              
+               $dataCou['Category']['Category']    =    $couponsData['Category']['Category'];
+               
+               /******************************Category Save************************************************/
+                 /******************************Brand Save************************************************/
                 $BrandInsId =   "";
                 if($brandData !=""){
                     $brandCount =	$this->Brand->find('count', array('fields' => array('id'), 'conditions' => array('name' =>$brandData)));
@@ -132,7 +252,7 @@ class Coupon extends AppModel {
                 }
                 $dataCou['Brand']['Brand']		=	$BrandInsId;
                 /******************************Brand Save************************************************/
-                /******************************Store Save************************************************/
+                  /******************************Store Save************************************************/
                 $StoreInsId =   "";
                 if($storeData !=""){
                     $storeQuery = $this->Store->find('list', array( 'fields' => array('id'),'conditions' => array('name' => $storeData) ));
@@ -144,6 +264,7 @@ class Coupon extends AppModel {
                             $storeQuery[$storeKey] =	$value;
                         }
                         $StoreInsId = $storeQuery[$storeKey];
+                       
                     }else{
                         App::uses('Store', 'Model');
                         $storeAdd = new Store();
@@ -151,22 +272,21 @@ class Coupon extends AppModel {
                         $dataStore['Store']['storedesc']	=	$storeData;
                         $dataStore['Store']['status']           =	'1';
                         $dataStore['Brand']['Brand']            =	$dataCou['Brand']['Brand'];
-                        $dataStore['Category']['Category']	=	$dataCou['Category']['Category'];
-
+                        $dataStore['Category']['Category']	=	$couponsData['Category']['Category'];
+                        
                         $storeAdd->save($dataStore);
                         $StoreInsId	=	$storeAdd->getLastInsertID();
                     }
                 }
                 $dataCou['Coupon']['store_id']		=	$StoreInsId;
+                
                 /******************************Store Save************************************************/
-                
                 /******************************Affiliate Save************************************************/
-                
                 
                 if($AffiliateData !=""){
                     $AffiliateQuery = $this->Affiliate->find('list', array( 'fields' => array('id'),'conditions' => array('name' => $AffiliateData) ));
-                    echo $AffiliateCount = $this->Affiliate->find('count', array('conditions' => array('name' => $AffiliateData) ));
-                    pr($AffiliateQuery);
+                    $AffiliateCount = $this->Affiliate->find('count', array('conditions' => array('name' => $AffiliateData) ));
+                    #pr($AffiliateQuery);
 
                     if(!empty($AffiliateCount)){
                         foreach($AffiliateQuery as $affiliKey=>$value){
@@ -189,27 +309,29 @@ class Coupon extends AppModel {
                 
                 /******************************Affiliate Save************************************************/
                 
-	}
+                #pr($dataCou);
         
-	pr($dataCou);
-        
-        $this->create();
-        $this->set($dataCou);
-        #$this->set($data);
-        #if ( !$this->save($data)) {
-        #if ( !$this->save($dataCou)) {
-            #$return['errors'][] = __(sprintf('Post for Row %d failed to save.',$i), true);
-        #}
-        if ($this->save($dataCou)) {
-            $return['messages'][] = __(sprintf('Post for Row %d  to save.',$i), true);
-	} else {
-            $return['errors'][] = __(sprintf('Post for Row %d failed to save.',$i), true);
+            $this->create();
+            $this->set($dataCou);
+           
+            if (!$this->save($dataCou)) {
+                echo "adasds";
+                #$return['messages'][] = __(sprintf('Post for Row %d  to save.',$i), true);
+                 #$return['errors'][] = __(sprintf('Post for Row %d failed to save.',$i), true);
+                 #$return['messages'] = __('', true);
+                 $return    =	array(  'messages' => array(), 'errors' => array('Post for Row %d failed to save.',$i), );
+            } else {
+               # $return['messages'][] = __(sprintf('Post for Row %d  to save.',$i), true);
+                #$return['errors'] = __('', true);
+               # $return['errors'] = __('', false);
+                $return		=	array(  'messages' => array('Post for Row %d  to save.',$i), 'errors' => array(), );
+            }
+            $i++;
         }
-        $i++;
-     }
-     
-     fclose($handle);
-     return $return;
+        
+        fclose($handle);
+        return $return;
+            
     }
     
     function categoryMatch($categoryName){

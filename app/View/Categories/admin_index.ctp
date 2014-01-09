@@ -1,5 +1,7 @@
 <?php echo $this->element('dashboard'); ?>
 
+
+
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
@@ -25,6 +27,26 @@
 			<th><?php echo $this->Paginator->sort('status'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
+        
+        <?php echo $this->Form->create('Category', array('url' => array_merge(array('action' => 'admin_index'), $this->params['pass'])
+		, 'name'=>'Category')); ?>
+       
+        
+         <td><?php echo $this -> Form -> input('id', array('type' => 'text', 'div' => false, 'label' => '', 'size' => '1'));?></td>
+         <td><?php echo $this -> Form -> input('name', array('type' => 'text', 'div' => false, 'label' => '', 'size' => '10'));?></td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td>&nbsp;</td>
+         <td><?php echo $this -> Form -> input('status', array('label' => '', 'div' => false, 'type' => 'select', 'options' => array('1' => 'Active', '0' => 'In-Active'), 'empty' => 'All'));                        ?></td>
+         
+         <td class="actions">
+             <?php
+                echo $this -> Html -> link(__('Search'), 'javascript:void(0)', array("onclick" => "Category.submit();", "class" => "search-action"));
+		echo $this -> Form -> end();
+            ?></td>
+	</tr>
+        
+        
 	<?php foreach ($categories as $category): ?>
 	<tr>
 		<td><?php echo h($category['Category']['id']); ?>&nbsp;</td>

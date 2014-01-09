@@ -24,10 +24,10 @@
 			$optionParentId[$key] = $value;
 		}
 	
-		echo $this->Form->input('name');
-		echo $this->Form->input('parent_id', array( 'options'=>$optionParentId));
-		echo $this->Form->input('image', array('type'=>'file'));
-		echo $this->Form->input('shortdesc', array('type'=>'textarea'));
+		echo $this->Form->input('name', array( 'label'=>'Category Name'));
+		echo $this->Form->input('parent_id', array('options'=>$optionParentId, 'label'=>'Parent Category '));
+		echo $this->Form->input('image', array('type'=>'file', 'label'=>'Category Image'));
+		echo $this->Form->input('shortdesc', array('type'=>'textarea', 'label'=>'Short Desc',  'class' => 'editorNotRequired tipOn', 'title' => 'Max 250 characters allowed','maxlength'=>'250'));
 		echo $this->Form->input('status', array('empty' => '--Select--','options'=>array('1'=>"Active", '0'=>'In-Active')));
 		echo $this->Form->input('createdby', array('type' => 'hidden', 'value'=>$this->UserAuth->getGroupName()));
 		echo $this->Form->input('createddate', array('type' => 'hidden', 'value'=>date('Y-m-d h:m:s')));

@@ -22,6 +22,8 @@ class CouponsController extends AppController {
  */
 	public function admin_index() {
 		$this->Coupon->recursive = 0;
+                $ord = array("Coupon.id" => "DESC");
+                $this->paginate = array('order' => $ord);
 		$this->set('coupons', $this->Paginator->paginate());
 	}
 
@@ -49,7 +51,7 @@ class CouponsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Coupon->create();
 			if ($this->Coupon->save($this->request->data)) {
-				$this->Session->setFlash(__('The coupon has been saved.'));
+                            	$this->Session->setFlash(__('The coupon has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The coupon could not be saved. Please, try again.'));
@@ -59,7 +61,7 @@ class CouponsController extends AppController {
 		$brands     =   $this->Coupon->Brand->find('list');
                 $affiliates  =   $this->Coupon->Affiliate->find('list');
                 
-		$categories = $this->Coupon->Category->generateTreeList(null, null, null, '--');
+		$categories = $this->Coupon->Category->generateTreeList(null, null, null, '-- --');
 		$this->set(compact('stores', 'brands', 'categories', 'affiliates'));
 	}
 	
@@ -81,18 +83,21 @@ class CouponsController extends AppController {
                 if($csvFileName != ""){
                     $messages = $this->Coupon->import($csvFileName);
                     
-                    if(sizeof($messages['errors']) != 0){
-                        foreach($messages['errors'] as $keys=>$errors){
-                            $this->Session->setFlash(__('Line no '.$keys.' coupon could not be saved. Please, try again.'));
+                       
+                        if(sizeof($messages['messages']) != 0){
+                            foreach($messages['messages'] as $key=>$messages){
+                                $this->Session->setFlash(__(' coupon has been be saved.'));
+                               # return $this->redirect(array('action' => 'index'));
+                            }
                         }
-                    }
-                    if(sizeof($messages['messages']) != 0){
-                        foreach($messages['messages'] as $key=>$messages){
-                            #echo 'Line no '.$key.' coupon has been be saved.';
-                            $this->Session->setFlash(__(' coupon has been be saved.'));
-                           # return $this->redirect(array('action' => 'index'));
-			}
-                    }
+                       
+                        if(sizeof($messages['errors']) != 0){
+                            foreach($messages['errors'] as $keys=>$errors){
+                                #$this->Session->setFlash(__('Line no '.$errors.' coupon could not be saved. Please, try again.'));
+                                $this->Session->setFlash(__($errors. ' Please, try again.'));
+                            }
+                        }
+                    
                     /*
                         $this->Coupon->create();
                         if ($this->Coupon->save($this->request->data)) {
@@ -121,7 +126,9 @@ class CouponsController extends AppController {
 			throw new NotFoundException(__('Invalid coupon'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+                    
 			if ($this->Coupon->save($this->request->data)) {
+                            
 				$this->Session->setFlash(__('The coupon has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
@@ -135,8 +142,9 @@ class CouponsController extends AppController {
 		$brands = $this->Coupon->Brand->find('list');
                 $affiliates  =   $this->Coupon->Affiliate->find('list');
 		#$categories = $this->Coupon->Category->find('list');
-		$categories = $this->Coupon->Category->generateTreeList(null, null, null, '--');
-		$this->set(compact('stores', 'brands', 'categories','affiliates'));
+		$categories = $this->Coupon->Category->generateTreeList(null, null, null, '-- --');
+                $ExceptCategories = $this->Coupon->Category->generateTreeList(null, null, null, '--');
+		$this->set(compact('stores', 'brands', 'categories','affiliates', 'ExceptCategories'));
 	}
 
 /**

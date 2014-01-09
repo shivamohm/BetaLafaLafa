@@ -53,7 +53,7 @@ $cakeDescription = __d('cake_dev', 'LafaLafa');
 					<?php #echo $this->UserAuth->getUserId(); ?>
 			</section>
 		</div>
-					
+				
 		<div class="actions">
 			<h3>Related actions</h3>
 			<ul>

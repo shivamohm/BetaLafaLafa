@@ -18,6 +18,7 @@
 	You should have received a copy of the GNU General Public License
 	along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 ?>
 
 <div>
@@ -37,6 +38,10 @@
 	<div style="float:left;padding-left:5px"><?php echo $this->Html->link(__("Edit Profile",true),"/editUser/".$this->UserAuth->getUserId()) ?></div-->
 <?php   } else {?>
 	<!--div style="float:left;padding-left:10px"><?php echo $this->Html->link(__("Profile",true),"/myprofile") ?></div-->
+         <div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Brands",true),"/admin/brands") ?></div>
+	<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Category",true),"/admin/categories") ?></div>
+	<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Store",true),"#") ?></div>
+	
 <?php   } ?>
 	<!--div style="float:left;padding-left:10px"><?php echo $this->Html->link(__("Change Password",true),"/changePassword") ?></div-->
 	<div style="float:right;padding-left:10px"><?php echo $this->Html->link(__("Sign Out",true),"/logout") ?></div>

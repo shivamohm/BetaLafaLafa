@@ -21,8 +21,25 @@ class CategoriesController extends AppController {
  * @return void
  */
 	public function admin_index() {
+                $name   =   $this->params['data']['Category']['name'];
+                #$parentId   =   $this->params['data']['Category']['parent_id'];
+                $arr    =   array('Category.name LIKE'=> "%".$name."%");
+                #$arr    =   array('Category.parent_id'=>0 );
+                
+                
 		$this->Category->recursive = 0;
+                $ord = array("Category.id" => "DESC");
+                
+               # $this->paginate = array('order' => $ord);
+                if($name !=""){
+                    $this->paginate = array('conditions' => $arr, "order" => $ord);
+                }else{
+                    $this->paginate = array("order" => $ord);    
+                }
+                
 		$this->set('categories', $this->Paginator->paginate());
+                $parentCategories = $this->Category->generateTreeList(null, null, null, ' ----');
+                $this->set(compact('parentCategories'));
 	}
 
 /**
@@ -38,6 +55,7 @@ class CategoriesController extends AppController {
 		}
 		$options = array('conditions' => array('Category.' . $this->Category->primaryKey => $id));
 		$this->set('category', $this->Category->find('first', $options));
+                
 	}
 
 /**
@@ -56,10 +74,13 @@ class CategoriesController extends AppController {
 			}
 		}
 		#$parentCategories = $this->Category->ParentCategory->find('list');
-		$parentCategories = $this->Category->ParentCategory->find('list', array('conditions' => array('parent_id' => 0,'status' => 1) ));
+		#$parentCategories = $this->Category->ParentCategory->find('list', array('conditions' => array('parent_id' => 0,'status' => 1) ));
+                $parentCategories = $this->Category->generateTreeList(null, null, null, ' ----');
+                
+                
 		$this->set(compact('parentCategories'));
 		
-		#pr($parentCategories);
+		
 	}
 
 /**
@@ -85,7 +106,8 @@ class CategoriesController extends AppController {
 			$this->request->data = $this->Category->find('first', $options);
 		}
 		#$parentCategories = $this->Category->ParentCategory->find('list');
-		$parentCategories = $this->Category->ParentCategory->find('list', array('conditions' => array('parent_id' => 0,'status' => 1) ));
+		#$parentCategories = $this->Category->ParentCategory->find('list', array('conditions' => array('parent_id' => 0,'status' => 1) ));
+                $parentCategories = $this->Category->generateTreeList(null, null, null, '--');
 		$this->set(compact('parentCategories'));
 	}
 

@@ -13,7 +13,16 @@ class BrandsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	#public $components = array('Paginator');
+        
+    public $name = 'Brands';
+    public $components = array('Search.Prg');
+    public $presetVars = array(
+        array('field' => 'id', 'type' => 'value'),
+        array('field' => 'name', 'type' => 'value'),
+        array('field' => 'status', 'type' => 'value'),
+       
+    );
 
 /**
  * index method
@@ -22,7 +31,15 @@ class BrandsController extends AppController {
  */
 	public function admin_index() {
 		$this->Brand->recursive = 0;
-		$this->set('brands', $this->Paginator->paginate());
+                $this->Prg->commonProcess();
+                $cond = $this->Brand->parseCriteria($this->passedArgs);
+                $ord = array("Brand.id" => "DESC");
+                $this->paginate = array("order" => $ord, 'conditions' => $cond);
+                
+                
+                
+		#$this->set('brands', $this->Paginator->paginate());
+		$this->set('brands', $this->paginate());
 	}
 
 /**

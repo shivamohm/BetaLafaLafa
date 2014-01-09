@@ -17,43 +17,22 @@
 		<legend><?php echo __('Add Store'); ?></legend>
 	<?php
 	
-	/*
 	
-		foreach($catAll as $key=>$value){
-			$id	=	$catAll[$key]['Category']['id'];
-			echo $catAll[$key]['Category']['name'];
-				echo "<br>---<br>";
-			$paId	=	$catAll[$key]['Category']['parent_id'];
-			if($paId == 0){
-				echo $optionCat[$id]	=	$catAll[$key]['Category']['name'];
-				echo "<br>---p 0<br>";
-			}else{
-					$optionCat[$id]	=	$catAll[$key]['Category']['name'];
-					echo "<br>---p 1";
-				}
-			
-			
-			}
-			pr($optionCat);
-		*/
 		echo $this->Form->input('Brand');
 		echo $this->Form->input('Category');
 		echo $this->Form->input('name');
-		echo $this->Form->input('storeurl');
-		echo $this->Form->input('affiliatesurl');
-		echo $this->Form->input('storedesc', array('type'=>'textarea'));
-		echo $this->Form->input('image', array('type'=>'file'));
-		echo $this->Form->input('status', array('empty' => '--Select--','options'=>array('1'=>"Active", '0'=>'In-Active')));
+		echo $this->Form->input('storeurl', array('label'=>'Store Url'));
+		echo $this->Form->input('affiliatesurl', array('label'=>'Affiliates Url'));
+		echo $this->Form->input('storedesc', array('type'=>'textarea', 'label'=>'Short Desc', 'class' => 'editorNotRequired tipOn', 'title' => 'Max 250 characters allowed','maxlength'=>'250'));
+		echo $this->Form->input('image', array('type'=>'file', 'label'=>'Store Image'));
 		echo $this->Form->input('owner_email');
 		echo $this->Form->input('owner_name');
 		echo $this->Form->input('owner_mobile');
+                echo $this->Form->input('status', array('empty' => '--Select--','options'=>array('1'=>"Active", '0'=>'In-Active')));
+                #echo $this->Form->input('store_offer_detail', array('type' => 'textarea', 'label'=>'Store Offer Detail'));
+                echo $this->Form->input('store_offer_detail', array('id' => 'store_offer_detail', 'label' => 'Store Offer Detail'));
 		echo $this->Form->input('createdby', array('type' => 'hidden', 'value'=>$this->UserAuth->getGroupName()));
 		echo $this->Form->input('createddate', array('type' => 'hidden', 'value'=>date('Y-m-d h:m:s')));
-		/*echo $this->Form->input('noofclick');
-		echo $this->Form->input('createdby');
-		echo $this->Form->input('createddate');
-		echo $this->Form->input('modifiedby');
-		echo $this->Form->input('modifieddate'); */
 		
 	?>
 	</fieldset>

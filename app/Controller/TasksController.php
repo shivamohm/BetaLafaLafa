@@ -51,7 +51,7 @@ class TasksController extends AppController {
 			if ($this->Task->save($this->request->data, array('validate'=>false))) {
 				#$log = $this->Task->getDataSource()->getLog(false, false);
 				#debug($log);
-			   $this->Session->setFlash('Your Tasks has been saved.');
+			    $this->Session->setFlash('Your Tasks has been saved.');
                 $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash('Unable to add your post.');

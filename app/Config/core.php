@@ -80,6 +80,7 @@
 		'log' => true
 	));
 
+
 /**
  * Application wide charset encoding
  */

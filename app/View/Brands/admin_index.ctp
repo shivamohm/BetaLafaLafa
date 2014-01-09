@@ -21,6 +21,25 @@
 			<th><?php echo $this->Paginator->sort('noofclick'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
+        
+        <tr class="filters">
+             <?php echo $this->Form->create('Brand', array('url' => array_merge(array('action' => 'admin_index'), $this->params['pass'])
+		, 'name'=>'Brand')); ?>
+            <td><?php echo $this -> Form -> input('id', array('type' => 'text', 'div' => false, 'label' => '', 'size' => '1'));?></td>
+           
+                        
+                        <td><?php echo $this -> Form -> input('name', array('type' => 'text', 'div' => false, 'label' => '', 'size' => '10'));?></td>
+                        <td><?php echo $this -> Form -> input('shortdesc', array('type' => 'text', 'div' => false, 'label' => '', 'size' => '10'));?></td>
+			<td><?php echo $this -> Form -> input('status', array('label' => '', 'div' => false, 'type' => 'select', 'options' => array('1' => 'Active', '0' => 'In-Active'), 'empty' => 'All'));                        ?></td>
+                         <td>&nbsp</td>
+
+			<td class="actions"><?php
+			
+			echo $this -> Html -> link(__('Search'), 'javascript:void(0)', array("onclick" => "Brand.submit();", "class" => "search-action"));
+			echo $this -> Form -> end();
+			?></td>
+		</tr>
+                
 	<?php foreach ($brands as $brand): ?>
 	<tr>
 		<td><?php echo h($brand['Brand']['id']); ?>&nbsp;</td>

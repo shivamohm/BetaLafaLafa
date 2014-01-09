@@ -10,8 +10,18 @@ class Brand extends AppModel {
  * Validation rules
  *
  * @var array
- */
-	public $validate = array(
+ */ 
+        
+    public $name = 'Brand';
+    public $actsAs = array('Search.Searchable');
+    
+    public $filterArgs = array(
+        array('name' => 'id', 'type' => 'like'),
+        array('name' => 'name', 'type' => 'like'),
+        array('name' => 'status', 'type' => 'value'),
+    );
+        
+    public $validate = array(
 		'name' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),

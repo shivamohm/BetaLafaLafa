@@ -20,12 +20,13 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('store_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('affiliate_id'); ?></th>
+                        <th><?php echo $this->Paginator->sort('coupon_code'); ?></th>
+			
 			<th><?php echo $this->Paginator->sort('Coupon Name'); ?></th>
-			<th><?php echo $this->Paginator->sort('link'); ?></th>
-			<!--th><?php echo $this->Paginator->sort('start_date'); ?></th-->
+			<!--th><?php echo $this->Paginator->sort('link'); ?></th-->
+			<th><?php echo $this->Paginator->sort('start_date'); ?></th>
 			<th><?php echo $this->Paginator->sort('Expiry Date'); ?></th>
-			<th><?php echo $this->Paginator->sort('coupon_code'); ?></th>
+			<th><?php echo $this->Paginator->sort('affiliate_id'); ?></th>
                         <th><?php echo $this->Paginator->sort('status'); ?></th>
 		
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -36,15 +37,16 @@
 		<td>
 			<?php echo $this->Html->link($coupon['Store']['name'], array('controller' => 'stores', 'action' => 'view', $coupon['Store']['id'])); ?>
 		</td>
+                <td><?php echo h($coupon['Coupon']['coupon_code']); ?>&nbsp;</td>
+		
+		<td><?php echo h($coupon['Coupon']['name']); ?>&nbsp;</td>
+		
+		<!--td><?php echo h($coupon['Coupon']['link']); ?>&nbsp;</td-->
+		<td><?php echo h($coupon['Coupon']['start_date']); ?>&nbsp;</td>
+		<td><?php echo h($coupon['Coupon']['end_date']); ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($coupon['Affiliate']['name'], array('controller' => 'affiliates', 'action' => 'view', $coupon['Affiliate']['id'])); ?>
 		</td>
-		<td><?php echo h($coupon['Coupon']['name']); ?>&nbsp;</td>
-		
-		<td><?php echo h($coupon['Coupon']['link']); ?>&nbsp;</td>
-		<!--td><?php echo h($coupon['Coupon']['start_date']); ?>&nbsp;</td-->
-		<td><?php echo h($coupon['Coupon']['end_date']); ?>&nbsp;</td>
-		<td><?php echo h($coupon['Coupon']['coupon_code']); ?>&nbsp;</td>
                 <td><?php if($coupon['Coupon']['status'] == 1){ echo "Active"; }else{ echo "In-Active";} ?>&nbsp;</td>
 		
 		<td class="actions">

@@ -19,7 +19,7 @@
 		echo $this->Form->input('id');
 		echo $this->Form->input('name');
 		echo $this->Form->input('image', array('type'=>'file'));
-		echo $this->Form->input('shortdesc', array('type'=>'textarea'));
+		echo $this->Form->input('shortdesc', array('type'=>'textarea','label'=>'Short Desc',  'class' => 'editorNotRequired tipOn', 'title' => 'Max 250 characters allowed','maxlength'=>'250'));
 		echo $this->Form->input('status', array('empty' => '--Select--','options'=>array('1'=>"Active", '0'=>'In-Active')));
 		echo $this->Form->input('modifiedby', array('type' => 'hidden', 'value'=>$this->UserAuth->getGroupName()));
 		echo $this->Form->input('modifieddate', array('type' => 'hidden', 'value'=>date('Y-m-d h:m:s')));

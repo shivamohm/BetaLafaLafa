@@ -19,7 +19,9 @@ if (!Configure::read('debug')):
 	throw new NotFoundException();
 endif;
 App::uses('Debugger', 'Utility');
+
 ?>
+
 <a href="http://cakephp.org/changelogs/<?php echo Configure::version(); ?>"><?php echo __d('cake_dev', 'Read the changelog'); ?> </a>
 <?php
 if (Configure::read('debug') > 0):

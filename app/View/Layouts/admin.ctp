@@ -36,15 +36,39 @@
 		echo $this -> Html -> css(array('admin_style')) . "\n";
 		echo $this -> Html -> css(array('admin_content')) . "\n";
 		
+		echo $this -> Html -> css('jq-ui-blitzer/jquery-ui-1.8.18.custom') . "\n";
+		
+		echo $this -> Html -> css('tipTip') . "\n";
+		
 		
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 		echo $this -> Html -> script('jquery.min') . "\n";
 		echo $this -> Html -> script('jquery.validate.min') . "\n";
+	
+		echo $this -> Html -> script('jquery-ui-1.8.18.custom.min') . "\n";
+		echo $this -> Html -> script('jquery-ui-timepicker-addon') . "\n";
 		
+		echo $this -> Html -> script('tiny_mce/jquery.tinymce') . "\n";
+		echo $this -> Html -> script('tiny_mce/tiny_mce') . "\n";
+		echo $this -> Html -> script('jquery.tipTip.minified') . "\n";
+        
+        
 		
 	?>
+		<script type="text/javascript">
+			$(function() {
+				$('textarea:not(.editorNotRequired)').tinymce({
+					theme : "simple", gecko_spellcheck : true,
+					onchange_callback: function (editor) {
+						tinyMCE.triggerSave();
+						$("#" + editor.id).valid();
+					}
+				});
+                                //bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+			});
+		</script>
 </head>
 <body>
 	
