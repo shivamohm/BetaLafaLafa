@@ -1,0 +1,17 @@
+{
+    "name": "cakedc/customers",
+    "type": "cakephp-plugin",
+    "description": "Customers Plugin for CakePHP",
+    "keywords": ["cakephp","customers","auth"],
+    "homepage": "http://cakedc.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cake Development Corporation",
+            "homepage": "http://cakedc.com"
+        }
+    ],
+    "require": {
+        "composer/installers": "*"
+    }
+}
