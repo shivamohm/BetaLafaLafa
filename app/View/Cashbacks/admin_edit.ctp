@@ -60,25 +60,26 @@
 		echo $this->Form->input('id');
 		echo $this->Form->input('store_id', array('empty'=>"--select--"));
 		echo $this->Form->input('affiliate_id', array('empty'=>"--select--"));
-                echo $this->Form->input('Category',array('empty'=>'--select--', 'style'=>'height:264px'));
+        echo $this->Form->input('Category',array('empty'=>'--select--', 'style'=>'height:264px'));
 		echo $this->Form->input('Brand', array('empty'=>"--select--"));
 		echo $this->Form->input('name', array('label'=>'Cash Back Name'));
 		echo $this->Form->input('price_rule', array('type'=>'text', 'label'=>'Price'));
 		echo $this->Form->input('payout',array('type'=>'text', 'label'=>'Payout'));
 		echo $this->Form->input('discount');
-                echo $this->Form->input('short_desc', array('type'=>'textarea', 'label'=>'Cash Back Detail'));
+        echo $this->Form->input('short_desc', array('type'=>'textarea', 'label'=>'Cash Back Detail'));
 		echo $this->Form->input('Tag', array('label'=>'Cash Back Tag'));
-		
-		
 		echo $this->Form->input('start_date', array('id' => 'start_date', 'label' => 'Cash Back Start date', 'type' => 'text',  'class' => 'txt-calendar', 'readonly' => 'true'));
-                echo $this->Form->input('expiry_date', array('id' => 'expiry_date', 'label' => 'Cash Back Expiry date', 'type' => 'text',  'class' => 'txt-calendar', 'readonly' => 'true'));
+        echo $this->Form->input('expiry_date', array('id' => 'expiry_date', 'label' => 'Cash Back Expiry date', 'type' => 'text',  'class' => 'txt-calendar', 'readonly' => 'true'));
 		
 		echo $this->Form->input('type' , array('label'=>'Cash Back Type ( CPC, CPS)'));
-                echo $this->Form->input('url', array('label'=>'Cash Back Url'));
+        echo $this->Form->input('url', array('label'=>'Cash Back Url'));
+        #echo $this->Form->input('pincodes', array('type'=>'text', 'maxlength'=>6));
+		#echo $this->Form->input('shipping_time');
 		echo $this->Form->input('utm');
 		echo $this->Form->input('affiliatekey', array('label'=>'Affiliate Key'));
 		echo $this->Form->input('status', array('empty' => '--Select--','options'=>array('1'=>"Active", '0'=>'In-Active')));
-                 echo $this->Form->input('terms_cond', array('type'=>'textarea', 'label'=>'Terms & Conditions'));
+		#echo $this->Form->input('refund_policy', array('type'=>'textarea', 'label'=>'Refund Policy'));
+        echo $this->Form->input('terms_cond', array('type'=>'textarea', 'label'=>'Terms & Conditions'));
 		echo $this->Form->input('modifiedby', array('type' => 'hidden', 'value'=>$this->UserAuth->getGroupName()));
 		echo $this->Form->input('modifieddate', array('type' => 'hidden', 'value'=>date('Y-m-d h:m:s')));
 		

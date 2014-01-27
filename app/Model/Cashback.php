@@ -26,41 +26,64 @@ class Cashback extends AppModel {
     );
     
     function import($filename){
-        
+        $return	= "";
+		$errorFlag = true;
+		
         $handle		=	fopen($filename, "r");
-        $header		=	fgetcsv($handle);
+        $headers		=	fgetcsv($handle);
         
         $header		=	array( '0'=>'name','1'=>'price_rule','2'=>'payout','3'=>'discount','4'=>'details','5'=>'tag','6'=>'start_date','7'=>'expiry_date','8'=>'cashback_type','9'=>'link','10'=>'utm','11'=>'affilite_key','12'=>'terms_cond','13'=>'store','14'=>'brand','15'=>'category','16'=>'subcategory','17'=>'subsubcategory','18'=>'affiliate');
-        $return		=	array(  'messages' => array(), 'errors' => array(), );
+        /*
+        if($header[0] != $headers[0]){
+			    return $return[]  =   array('Invalid Fields Name');
+                $errorFlag = false;
+		}*/
+        #$return		=	array(  'messages' => array(), 'errors' => array(), );
         $i			=	1;
-        $return		=	array(  'messages' => array(), 'errors' => array(), );
-           
+        
+      
         
         while (($row = fgetcsv($handle, 1000, ',')) !== FALSE) {
             
             if(count($row) < 16 ){
-                return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('CSV file currupted. Please you can create new csv file then import here'), true)), );
+                #return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('CSV file currupted. Please you can create new csv file then import here'), true)), );
+                return $return[]  =   array('CSV file currupted. Please you can create new csv file then import here ');
+                $errorFlag = false;
             }
-            if($row[1] == ""){
-                return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Cashback Name can not be NUll for Row %d failed to save.',$i), true)), );
+            if($row[0] == ""){
+                #return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Cashback Name can not be NUll for Row %d failed to save.',$i), true)), );
+                return $return[]  =   array('Cashback Name can not be NUll for Row %d failed to save '.$i);
+                $errorFlag = false;
             }
             if($row[2] == ""){
-                return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Payout can not be NULL for Row %d failed to save ',$i), true)), );
+                #return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Payout can not be NULL for Row %d failed to save ',$i), true)), );
+                return $return[]  =   array('Payout can not be NULL for Row %d failed to save '.$i);
+                $errorFlag = false;
             }
             if($row[3] == ""){
-                return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Discount can not be NULL for Row %d failed to save .',$i), true)), );
+                #return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Discount can not be NULL for Row %d failed to save .',$i), true)), );
+                return $return[]  =   array('Discount can not be NULL for Row %d failed to save '.$i);
+                $errorFlag = false;
             }
             if($row[6] == ""){
-                return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Cashback Start Date can not be NULL for Row %d failed to save  .',$i), true)), );
+                #return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Cashback Start Date can not be NULL for Row %d failed to save  .',$i), true)), );
+                return $return[]  =   array('Cashback Start Date can not be NULL for Row %d failed to save '.$i);
+                $errorFlag = false;
             }
             if($row[7] == ""){
-                return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Cashback Expiry Date can not be NULL for Row %d failed to save  .',$i), true)), );
+                #return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Cashback Expiry Date can not be NULL for Row %d failed to save  .',$i), true)), );
+                return $return[]  =   array('Cashback Expiry Date can not be NULL for Row %d failed to save '.$i);
+                $errorFlag = false;
             }
             if($row[9] == ""){
-                return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Cashback URL can not be NULL for Row %d failed to save  .',$i), true)), );
+                #return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Cashback URL can not be NULL for Row %d failed to save  .',$i), true)), );
+                return $return[]  =   array('Cashback URL can not be NULL for Row %d failed to save '.$i);
+                $errorFlag = false;
             }
             if($row[13] == ""){
-                return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Merchant Name can not be NULL for Row %d failed to save .',$i), true)), );
+                #return $return		=	array(  'messages' => array(), 'errors' => array(__(sprintf('Merchant Name can not be NULL for Row %d failed to save .',$i), true)), );
+                return $return[]  =   array('Merchant Name can not be NULL for Row %d failed to save '.$i);
+                $errorFlag = false;
             }
             
             $data = array();
@@ -113,7 +136,9 @@ class Cashback extends AppModel {
                             $categoryQuery  = $this->Category->find('list', array( 'fields' => array('id'),'conditions' => array('name' => trim($categoryData), 'Category.parent_id' => '0') ));
                             
                             if($categoryCount == 0){
-                                return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('Category Name  '.$categoryData. ' does not match for Row %d failed to save.',$i), true)), );
+                                #return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('Category Name  '.$categoryData. ' does not match for Row %d failed to save.',$i), true)), );
+                                return $return[]  =   array('Category Name  '.$categoryData. ' does not match for Row %d failed to save.'.$i);
+								$errorFlag = false;
                             }
                             if(!empty($categoryCount)){
                                foreach($categoryQuery as $catKey=>$value){
@@ -144,7 +169,9 @@ class Cashback extends AppModel {
                                       $subCategoryQuery = $this->Category->find('list', array( 'fields' => array('id'),'conditions' => array('name' => $subCatName, 'Category.parent_id' => $mainCateId) ));
 
                                       if($subCategoryCount == 0){
-                                          return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('Sub Category Name  '.$subCatName. ' does not match for Row %d failed to save.',$i), true)), );
+                                          #return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('Sub Category Name  '.$subCatName. ' does not match for Row %d failed to save.',$i), true)), );
+                                          return $return[]  =   array('Sub Category Name  '.$subCatName. ' does not match for Row %d failed to save.'.$i);
+										  $errorFlag = false;
                                       }
                                       
                                       if(!empty($subCategoryCount)){
@@ -157,7 +184,9 @@ class Cashback extends AppModel {
                               }
                           } $cateCashback = array_merge($cateCashback, $subCategoryId);
                      }else{ 
-                         return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('Category Name  and Sub Categoey  does not match for Row %d failed to save.',$i), true)), );
+                         #return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('Category Name  and Sub Categoey  does not match for Row %d failed to save.',$i), true)), );
+                         return $return[]  =   array('Category Name  and Sub Categoey  does not match for Row %d failed to save.'.$i);
+						 $errorFlag = false;
                      }
                     }
                   
@@ -178,7 +207,9 @@ class Cashback extends AppModel {
                                         $subSubCategoryQuery = $this->Category->find('list', array( 'fields' => array('id'),'conditions' => array('name' => $subSubCatName, 'Category.parent_id' => $mainSubCategoryId) ));
 
                                         if($subSubCategoryCount == 0){
-                                            return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('Sub Sub Category Name  '.$subSubCatName. ' does not match for Row %d failed to save.',$i), true)), );
+                                            #return $return  =   array(  'messages' => array(), 'errors' => array(__(sprintf('Sub Sub Category Name  '.$subSubCatName. ' does not match for Row %d failed to save.',$i), true)), );
+                                            return $return[]  =   array('Sub Sub Category Name  '.$subSubCatName. ' does not match for Row %d failed to save.'.$i);
+											$errorFlag = false;
                                         }
                                         if(!empty($subSubCategoryCount)){
                                             foreach($subSubCategoryQuery as $subSubCategoryQueryKey=>$subSubCategoryQueryValue){
@@ -193,31 +224,86 @@ class Cashback extends AppModel {
                         $cateCashback = array_merge($cateCashback, $subSubCategoryId);
                    }
             }
-            
-            $CategoryId =$subCategoryId= $subSubCategoryId="";
-            
-            foreach ($header as $k=>$head) {
+             $checkCategoryId	=	$CategoryId;
+             
+             $CategoryId =$subCategoryId= $subSubCategoryId="";
+             
+             foreach ($header as $k=>$head) {
                 $head	=	trim($head);
                 $data['Cashback'][$head]  =   (isset($row[$k])) ? $row[$k] : '';
             }
+             
+             $brandData          =   $data['Cashback']['brand'];
+			 $storeData          =   $data['Cashback']['store'];
+			 
+			 /******************************Brand Save************************************************/
+                $BrandInsId =   "";
+                if($brandData !=""){
+					$BrandInsId		=	$this->brandSave($brandData);
+                } 
+                $data['Cashback']['brand']		=	$BrandInsId;
+                
+                /******************************Brand Save************************************************/
+                 /******************************Store Save************************************************/
+                $StoreInsId =   "";
+                if($storeData !=""){
+					$StoreInsId = $this->storeSave($storeData, $BrandInsId, $cateCashback);
+					$data['Cashback']['store_id']	= $StoreInsId;
+					
+                }
+             
+               /******************************Store Save************************************************/
+               
+				$CouponNameCount = $this->find('count', 
+									array( 'conditions' => 
+										array('Cashback.name' => trim($row[0]),
+											   'Cashback.store_id' => $StoreInsId),
+											   'joins' => array(
+															array('table' => 'categories_cashbacks',
+															'alias' => 'CategoriesCashback',
+															'type' => 'INNER',
+															'conditions' => array(
+																			'CategoriesCashback.category_id' => $checkCategoryId,
+																			'CategoriesCashback.cashback_id = Cashback.id'
+																			)
+															  )
+															),
+															'group' => 'Cashback.id'
+										));
+		
+            if($CouponNameCount !=""){
+				 
+				$return[]  =   $row[0].'  Cashback name duplicate not allowed. Issue Row No. '.$i;
+				$errorFlag = false;
+			}
+            
             $data['Category']['Category']= $cateCashback;
             $dataA[]  =   $data;
             $i++;
         }
        
+		if(!$errorFlag){
+			return $return;
+			}
       
-        /***************************After Validationz**********************************************/
+      
+      
+        /***************************After Validation**********************************************/
        
         $brandData=  $storeData= $AffiliateData="";
+        if($errorFlag){
+			$ii=1;
         foreach($dataA as $key=>$cashbackData){
             
           
             $categoryData       =   $cashbackData['Cashback']['category'];
             $subCategory        =   $cashbackData['Cashback']['subcategory'];
             $subSubCategory     =   $cashbackData['Cashback']['subsubcategory'];
-            $brandData          =   $cashbackData['Cashback']['brand'];
-            $storeData          =   $cashbackData['Cashback']['store'];
+          
+            $brandId          	=   $cashbackData['Cashback']['brand'];
+            $storeId          	=   $cashbackData['Cashback']['store_id'];
             $AffiliateData      =   $cashbackData['Cashback']['affiliate'];
+            
             
             if($cashbackData['Cashback']['start_date'] != ""){
                     $stDate    =   date('Y-m-d H:m:s',strtotime(trim($cashbackData['Cashback']['start_date'])));
@@ -249,6 +335,8 @@ class Cashback extends AppModel {
                 $dataCou['Cashback']['createdby']	=	'Admin';#$this->UserAuth->getGroupName();
                 $dataCou['Cashback']['status']		=	1;
                 $dataCou['Cashback']['createddate']	=	date('Y-m-d h:m:s');
+                $dataCou['Cashback']['store_id']			=	$storeId;
+                $dataCou['Brand']['Brand']					=	$brandId;
                 
               
                /******************************Category Save************************************************/
@@ -257,64 +345,7 @@ class Cashback extends AppModel {
               $dataCou['Category']['Category']    =   $cashbackData['Category']['Category'];
               
                /******************************Category Save************************************************/
-               /******************************Brand Save************************************************/
-               $BrandInsId =   "";
-                if($brandData !=""){
-                    $brandCount =	$this->Brand->find('count', array('fields' => array('id'), 'conditions' => array('name' =>$brandData)));
-                    $brandQuery =	$this->Brand->find('list', array('fields' => array('id'), 'conditions' => array('name' =>$brandData)));
-                
-                    if(!empty($brandCount)){
-                        foreach($brandQuery as $key=>$value){
-                            $brandQuery[$key] =	$value;
-                        }
-                        $BrandInsId    = $brandQuery[$key];
-                       
-                    }else{
-                        App::uses('Brand', 'Model');
-                        $brandAdd = new Brand();
-                        $dataBrand['Brand']['name']		=	$brandData;
-                        $dataBrand['Brand']['shortdesc']	=	$brandData;
-                        $dataBrand['Brand']['status']	=	'1';
-
-                        $brandAdd->save($dataBrand);
-                        $BrandInsId	=	$brandAdd->getLastInsertID();
-                        
-                    }
-                }
-                $dataCou['Brand']['Brand']		=	$BrandInsId;
-               
-                /******************************Brand Save************************************************/
-                /******************************Store Save************************************************/
-               
-                $StoreInsId =   "";
-                if($storeData !=""){
-                    $storeQuery = $this->Store->find('list', array( 'fields' => array('id'),'conditions' => array('name' => $storeData) ));
-                    $storeCount = $this->Store->find('count', array('conditions' => array('name' => $storeData) ));
-                    #pr($storeQuery);
-
-                    if(!empty($storeCount)){
-                        foreach($storeQuery as $storeKey=>$value){
-                            $storeQuery[$storeKey] =	$value;
-                        }
-                        $StoreInsId = $storeQuery[$storeKey];
-                       
-                    }else{
-                        App::uses('Store', 'Model');
-                        $storeAdd = new Store();
-                        $dataStore['Store']['name']		=	$storeData;
-                        $dataStore['Store']['storedesc']	=	$storeData;
-                        $dataStore['Store']['status']           =	'1';
-                        $dataStore['Brand']['Brand']            =	$dataCou['Brand']['Brand'];
-                        $dataStore['Category']['Category']	=	$cashbackData['Category']['Category'];
-                        
-                        $storeAdd->save($dataStore);
-                        $StoreInsId	=	$storeAdd->getLastInsertID();
-                    }
-                    
-                }
-                $dataCou['Cashback']['store_id']    =   $StoreInsId;
-                
-                /******************************Store Save************************************************/
+              
                 /******************************Affiliate Save************************************************/
                
                 if($AffiliateData !=""){
@@ -342,51 +373,157 @@ class Cashback extends AppModel {
                 
                 /******************************Affiliate Save************************************************/
                 
-                pr($dataCou);
+                
         
             $this->create();
             $this->set($dataCou);
            
-            if (!$this->save($dataCou)) {
+            if (!$this->save($dataCou, array('validates'=>false))) {
                
-                 $return    =	array(  'messages' => array(), 'errors' => array('Post for Row %d failed to save.',$i), );
+                 #$return    =	array(  'messages' => array(), 'errors' => array('Post for Row %d failed to save.',$i), );
+                 $return  =   array('There are some problem in your Cashback File. Please check Cashback URL and  Category   '. $ii);
             } else {
               
-                $return		=	array(  'messages' => array('Post for Row %d  to save.',$i), 'errors' => array(), );
+                $return  =   array('19999'=>'Cashback File has been uploaded successfully. Total Recored - '. $ii);
             }
-            $i++;
+            $ii++;
         }
         
         fclose($handle);
+		}
         return $return;
             
     }
     
     
-    
-    
-    
-    
-    
      function categoryMatch($categoryName){
         
-        $categoryData	=	strtolower($categoryName);
-	$stCate			=	$this->SiteSelfCategory();
-	if(array_key_exists($categoryData, $stCate)){
-            return  $stCate[$categoryData];
-	}else{
-            return $categoryName;
-        }
+		$categoryData	=	strtolower($categoryName);
+		$stCate			=	$this->SiteSelfCategory();
+		if(array_key_exists($categoryData, $stCate)){
+		return  $stCate[$categoryData];
+		}else{
+		return $categoryName;
+		}
     }
     
     function SiteSelfCategory(){
         
-        $stCate		=	array("Footwear"=>"Shoes","Sneakers"=>"Shoes","Customized Products"=>"");
-	$files		=	array_map('strtolower', $stCate);
-	$data		=	array_change_key_case($files,CASE_LOWER);
-	return $data;
+		$stCate		=	array("Footwear"=>"Shoes","Sneakers"=>"Shoes","Customized Products"=>"");
+		$files		=	array_map('strtolower', $stCate);
+		$data		=	array_change_key_case($files,CASE_LOWER);
+		return $data;
     }
+    
+    
+    function brandSave($brandData){
+		
+		 $brandCount =	$this->Brand->find('count', array('fields' => array('id'), 'conditions' => array('name' =>$brandData)));
+         $brandQuery =	$this->Brand->find('list', array('fields' => array('id'), 'conditions' => array('name' =>$brandData)));
+         
+         if(!empty($brandCount)){
+			 foreach($brandQuery as $key=>$value){
+				 $brandQuery[$key] =	$value;
+             }
+             $BrandInsId    = $brandQuery[$key];
+          }else{
+			  App::uses('Brand', 'Model');
+			  $brandAdd = new Brand();
+              $dataBrand['Brand']['name']		=	$brandData;
+              $dataBrand['Brand']['shortdesc']	=	$brandData;
+              $dataBrand['Brand']['status']	=	'1';
+              $brandAdd->save($dataBrand);
+			  $BrandInsId	=	$brandAdd->getLastInsertID();
+		}
+		return $BrandInsId;
+	}
+	
+	function storeSave($storeData, $brandId, $StoreCategoryId){
+		#pr($StoreCategoryId);
+		
+		#$storeQuery = $this->Store->find('list', array( 'fields' => array('id'),'conditions' => array('name' => $storeData) ));
+		$storeQuery = $this->Store->find('first', array( 'conditions' => array('name' => $storeData) ));
+		
+		$storeCount = $this->Store->find('count', array('conditions' => array('name' => $storeData) ));
+		
+		
+		
+		App::uses('Store', 'Model');
+		$storeAdd = new Store();
+		if(!empty($storeCount)){
+			$getCat = "";
+			 count($storeQuery['Category']);
+			if(count($storeQuery['Category']) != 0){
+			
+			foreach($storeQuery['Category'] as $storeKey=>$value){
+				
+				$getCat[$storeKey]	=	$value['id'];
+				
+			}
+			
+			$StoreCategoryId	=	array_merge($getCat, $StoreCategoryId);
+			}else{
+				$StoreCategoryId	=	$StoreCategoryId;
+				}
+			
+			$StoreInsId = $storeQuery['Store']['id'];
+			
+			
+			$StoreInsId = $storeQuery['Store']['id'];
+			$dataStore['Store']['id']		 	=	$StoreInsId;
+			$dataStore['Store']['name']		 	=	$storeData;
+			$dataStore['Store']['storedesc'] 	=	$storeData;
+			$dataStore['Store']['status']    	=	'1';
+			#$dataStore['Brand']['Brand']     	=	$dataCou['Brand']['Brand'];
+			$dataStore['Brand']['Brand']     	=	$brandId;
+			#$dataStore['Category']['Category']	=	$couponsData['Category']['Category'];
+			$dataStore['Category']['Category']	=	$StoreCategoryId;
+			#pr($dataStore);
+			
+			$storeAdd->save($dataStore);
+			
+		}else{
+			
+			
+			
+			$dataStore['Store']['name']		 	=	$storeData;
+			$dataStore['Store']['storedesc'] 	=	$storeData;
+			$dataStore['Store']['status']    	=	'1';
+			#$dataStore['Brand']['Brand']     	=	$dataCou['Brand']['Brand'];
+			$dataStore['Brand']['Brand']     	=	$brandId;
+			#$dataStore['Category']['Category']	=	$couponsData['Category']['Category'];
+			$dataStore['Category']['Category']	=	$StoreCategoryId;
+			#pr($dataStore);
+			
+			$storeAdd->save($dataStore);
+			$StoreInsId	=	$storeAdd->getLastInsertID();
+		}
+		
+		return $StoreInsId;
+	}
+
+	
+	
     public $validate = array(
+		'cashbackcsv' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				'message' => 'Your custom message here',
+				#'allowEmpty' => false,
+				#'required' => true,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+			'extension' => array(
+			'rule' => array('extension', array('csv')),
+				#'allowEmpty' => false,
+				#'required' => true,
+				#'last' => false, // Stop validation after this rule
+				#'on' => 'create',
+				#'message' => 'Only csv files',
+			),
+			
+		),
 		'store_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -476,6 +613,12 @@ class Cashback extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			 array( 
+				'required' => true, 
+				'allowEmpty' => false, 
+				'rule' => array('url', true), 
+				'message' => 'Please enter a valid URL.', 
+				'last' => true), 
 		),
 		
 		'start_date' => array(
@@ -509,6 +652,24 @@ class Cashback extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		#'pincodes' => array(
+		#	'numeric' => array(
+		#		'rule' => array('numeric'), 
+		#		'message' => 'Please enter a valid Postal Code for India.',
+				#'allowEmpty' => false,
+				#'required' => true,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+		#	),
+		#	'minLength'=> array( 
+         #       'rule' => array('minLength', 6), 
+          #      'message' => 'Please enter a valid Postal Code for India.' 
+           # ), 
+            #'maxLength'=> array( 
+             #   'rule' => array('maxLength', 6), 
+              #  'message' => 'Please enter a valid Postal Code for India.' 
+            #) 
+		#),
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed

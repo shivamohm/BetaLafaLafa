@@ -1,3 +1,10 @@
+<div id="messages">
+<?php
+    if ($messages = $this->Session->read('Message.multiFlash')) {
+        foreach($messages as $k=>$v) echo $this->Session->flash('multiFlash.'.$k);
+    }
+?>
+</div>
 <?php echo $this->element('dashboard'); ?>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

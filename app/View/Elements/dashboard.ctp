@@ -29,6 +29,7 @@
 		<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Store",true),"/admin/stores") ?></div>
 		<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Coupons",true),"/admin/coupons") ?></div>
 		<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Cashback",true),"/admin/cashbacks") ?></div>
+		<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Customers",true),"/admin/customers") ?></div>
 	
 	<!--div style="float:left;padding-left:5px"><?php echo $this->Html->link(__("Add User",true),"/addUser") ?></div>
 	<div style="float:left;padding-left:5px"><?php echo $this->Html->link(__("All Users",true),"/allUsers") ?></div>
@@ -41,7 +42,11 @@
 	<!--div style="float:left;padding-left:10px"><?php echo $this->Html->link(__("Profile",true),"/myprofile") ?></div-->
          <div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Brands",true),"/admin/brands") ?></div>
 	<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Category",true),"/admin/categories") ?></div>
-	<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Store",true),"#") ?></div>
+	<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Store",true),"/admin/stores") ?></div>
+	<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Coupons",true),"/admin/coupons") ?></div>
+		<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Cashback",true),"/admin/cashbacks") ?></div>
+		<div style="float:left;padding-left:10px; color:#FFF; "><?php echo $this->Html->link(__("Customers",true),"/admin/customers") ?></div>
+	
 	
         
 <?php   } ?>

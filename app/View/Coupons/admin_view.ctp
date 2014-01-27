@@ -18,44 +18,41 @@
 <div class="coupons view">
 <h2><?php echo __('Coupon'); ?></h2>
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($coupon['Coupon']['id']); ?>
-			&nbsp;
-		</dd>
+	
+		
 		<dt><?php echo __('Store'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($coupon['Store']['name'], array('controller' => 'stores', 'action' => 'view', $coupon['Store']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Name'); ?></dt>
+		<dt><?php echo __('Coupon Name'); ?></dt>
 		<dd>
 			<?php echo h($coupon['Coupon']['name']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Desc'); ?></dt>
+		<dt><?php echo __('Coupon Desc'); ?></dt>
 		<dd>
 			<?php echo h($coupon['Coupon']['desc']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Link'); ?></dt>
+		<dt><?php echo __('Coupon Link'); ?></dt>
 		<dd>
 			<?php echo h($coupon['Coupon']['link']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Start Date'); ?></dt>
+		<dt><?php echo __('Coupon Start Date'); ?></dt>
 		<dd>
 			<?php echo h($coupon['Coupon']['start_date']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('End Date'); ?></dt>
+		<dt><?php echo __('Coupon End Date'); ?></dt>
 		<dd>
-			<?php echo h($coupon['Coupon']['end_date']); ?>
+			<?php  echo $this->Time->format('F jS, Y h:i A', $coupon['Coupon']['end_date']);  ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Status'); ?></dt>
+		<dt><?php echo __('Coupon Status'); ?></dt>
 		<dd>
-			<?php echo h($coupon['Coupon']['status']); ?>
+			<?php echo $coupon['Coupon']['status'] = $coupon['Coupon']['status'] ==1?'Active':'In-Active';?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Coupon Code'); ?></dt>
@@ -63,7 +60,12 @@
 			<?php echo h($coupon['Coupon']['coupon_code']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Createby'); ?></dt>
+		<dt><?php echo __('Except Category'); ?></dt>
+		<dd>
+			<?php echo h($coupon['Coupon']['except_category']); ?>
+			&nbsp;
+		</dd>
+		<!--dt><?php echo __('Createby'); ?></dt>
 		<dd>
 			<?php echo h($coupon['Coupon']['createby']); ?>
 			&nbsp;
@@ -78,11 +80,13 @@
 			<?php echo h($coupon['Coupon']['modifiedby']); ?>
 			&nbsp;
 		</dd>
+		<?php if($coupon['Coupon']['modifieddate'] != "0000-00-00 00:00:00"){ ?>
 		<dt><?php echo __('Modifieddate'); ?></dt>
 		<dd>
 			<?php echo h($coupon['Coupon']['modifieddate']); ?>
 			&nbsp;
-		</dd>
+		</dd-->
+		<?php } ?>
 	</dl>
 </div>
 <div class="related">
@@ -95,11 +99,7 @@
 		<th><?php echo __('Image'); ?></th>
 		<th><?php echo __('Shortdesc'); ?></th>
 		<th><?php echo __('Status'); ?></th>
-		<th><?php echo __('Noofclick'); ?></th>
-		<th><?php echo __('Createdby'); ?></th>
-		<th><?php echo __('Createddate'); ?></th>
-		<th><?php echo __('Modifiedby'); ?></th>
-		<th><?php echo __('Modifieddate'); ?></th>
+		
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($coupon['Brand'] as $brand): ?>
@@ -109,11 +109,7 @@
 			<td><?php echo $brand['image']; ?></td>
 			<td><?php echo $brand['shortdesc']; ?></td>
 			<td><?php echo $brand['status']; ?></td>
-			<td><?php echo $brand['noofclick']; ?></td>
-			<td><?php echo $brand['createdby']; ?></td>
-			<td><?php echo $brand['createddate']; ?></td>
-			<td><?php echo $brand['modifiedby']; ?></td>
-			<td><?php echo $brand['modifieddate']; ?></td>
+			
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'brands', 'action' => 'view', $brand['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'brands', 'action' => 'edit', $brand['id'])); ?>
@@ -124,12 +120,14 @@
 	</table>
 <?php endif; ?>
 
-	<div class="actions">
+	<!--div class="actions">
 		<ul>
 			<li><?php echo $this->Html->link(__('New Brand'), array('controller' => 'brands', 'action' => 'add')); ?> </li>
 		</ul>
-	</div>
+	</div-->
 </div>
+<div class="related"></div>
+<div class="related"></div>
 <div class="related">
 	<h3><?php echo __('Related Categories'); ?></h3>
 	<?php if (!empty($coupon['Category'])): ?>
@@ -137,34 +135,26 @@
 	<tr>
 		<th><?php echo __('Id'); ?></th>
 		<th><?php echo __('Name'); ?></th>
-		<th><?php echo __('Lft'); ?></th>
-		<th><?php echo __('Rght'); ?></th>
+		
 		<th><?php echo __('Parent Id'); ?></th>
-		<th><?php echo __('Image'); ?></th>
+		
 		<th><?php echo __('Shortdesc'); ?></th>
-		<th><?php echo __('Noofclick'); ?></th>
+		
 		<th><?php echo __('Status'); ?></th>
-		<th><?php echo __('Createdby'); ?></th>
-		<th><?php echo __('Createddate'); ?></th>
-		<th><?php echo __('Modifiedby'); ?></th>
-		<th><?php echo __('Modifieddate'); ?></th>
+		
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($coupon['Category'] as $category): ?>
 		<tr>
 			<td><?php echo $category['id']; ?></td>
 			<td><?php echo $category['name']; ?></td>
-			<td><?php echo $category['lft']; ?></td>
-			<td><?php echo $category['rght']; ?></td>
-			<td><?php echo $category['parent_id']; ?></td>
-			<td><?php echo $category['image']; ?></td>
+			
+			<td><?php if($category['parent_id'] != 0){	echo $category['parent_id']; } ?></td>
+			
 			<td><?php echo $category['shortdesc']; ?></td>
-			<td><?php echo $category['noofclick']; ?></td>
-			<td><?php echo $category['status']; ?></td>
-			<td><?php echo $category['createdby']; ?></td>
-			<td><?php echo $category['createddate']; ?></td>
-			<td><?php echo $category['modifiedby']; ?></td>
-			<td><?php echo $category['modifieddate']; ?></td>
+			
+			<td><?php echo $category['status'] = $category['status']==1? "Active":"In-Active"; ?></td>
+			
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'categories', 'action' => 'view', $category['id'])); ?>
 				<?php echo $this->Html->link(__('Edit'), array('controller' => 'categories', 'action' => 'edit', $category['id'])); ?>
@@ -175,9 +165,9 @@
 	</table>
 <?php endif; ?>
 
-	<div class="actions">
+	<!--div class="actions">
 		<ul>
 			<li><?php echo $this->Html->link(__('New Category'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
 		</ul>
-	</div>
+	</div-->
 </div>

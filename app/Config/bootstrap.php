@@ -29,8 +29,18 @@ Cache::config('default', array('engine' => 'File'));
             'Usermgmt' => array('routes' => true, 'bootstrap' => true),
         ));
         
-	#CakePlugin::load('Upload'); #shivam
-	CakePlugin::load('search');
+#CakePlugin::load('Upload'); #shivam
+CakePlugin::load('Facebook'); #shivam
+
+CakePlugin::load('search');
+CakePlugin::load('Customers');
+CakePlugin::load('Utils');
+Configure::write('App.defaultEmail', 'awasthi.shivam@gmail.com');
+Configure::write('Customers.disableDefaultAuth');
+Configure::write('Customers.emailConfig', 'default');
+Configure::write('Customers.defaultRole', 'user_registered'); 
+
+
 
 /**
  * The settings below can be used to set additional paths to models, views and controllers.

@@ -18,7 +18,7 @@
                     $( "#start_date" ).datepicker( "option", "", date2);
                 }
             });
-            $( "#expiry_date" ).datetimepicker({
+            $( "#end_date" ).datetimepicker({
                 dateFormat:'yy-mm-dd',
                 //dateFormat:'dd-mm-yy',
                 hour: 23,
@@ -27,10 +27,10 @@
                 changeMonth: true,
                 numberOfMonths: 1,
                 onSelect: function( selectedDate ) {
-                    var date2 = $('#expiry_date').datepicker('getDate'); 
+                    var date2 = $('#end_date').datepicker('getDate'); 
                     //date2.setDate(date2.getDate()+7); 
                     //$( "#expiry_date" ).datepicker( "option", "minDate", date2);
-                    $("#expiry_date" ).datepicker( "option", "", date2);
+                    $("#end_date" ).datepicker( "option", "", date2);
                 }
             });
             
@@ -52,13 +52,13 @@
 	</ul>
 </div>
 <div class="coupons form">
-<?php echo $this->Form->create('Coupon'); ?>
+<?php echo $this->Form->create('Coupon', array('action'=>'edit')); ?>
 	<fieldset>
 		<legend><?php echo __('Edit Coupon'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('store_id', array('empty'=>"--select--"));
-                echo $this->Form->input('Brand');
+        echo $this->Form->input('Brand');
 		echo $this->Form->input('Category', array('style'=>'height:264px'));
 		#echo $this->Form->input('except_category', array('label'=>'Except Category', 'multiple'=>'multiple', 'options'=>$ExceptCategories));
 		echo $this->Form->input('except_category', array('label'=>'Except Category', 'type'=>'textarea'));
@@ -72,8 +72,8 @@
                 echo $this->Form->input('link');
 		echo $this->Form->input('reviews', array('type'=>"textarea" ,'label'=>'Coupon Reviews'));
 		echo $this->Form->input('desc', array('type'=>"textarea",'label'=>'Coupon Short Desc', 'class' => 'editorNotRequired tipOn', 'title' => 'Max 250 characters allowed','maxlength'=>'250'));
-		echo $this->Form->input('start_date', array('id' => 'start_date', 'label' => 'Cash Back Start date', 'type' => 'text',  'class' => 'txt-calendar', 'readonly' => 'true'));
-                echo $this->Form->input('expiry_date', array('id' => 'expiry_date', 'label' => 'Cash Back Expiry date', 'type' => 'text',  'class' => 'txt-calendar', 'readonly' => 'true'));
+		echo $this->Form->input('start_date', array('id' => 'start_date', 'label' => 'Coupon Start date', 'type' => 'text',  'class' => 'txt-calendar', 'readonly' => 'true'));
+                echo $this->Form->input('end_date', array('id' => 'end_date', 'label' => 'Coupon Expiry date', 'type' => 'text',  'class' => 'txt-calendar', 'readonly' => 'true'));
 		
 		echo $this->Form->input('status', array('empty' => '--Select--','options'=>array('1'=>"Active", '0'=>'In-Active')));
 		echo $this->Form->input('modifiedby', array('type' => 'hidden', 'value'=>$this->UserAuth->getGroupName()));

@@ -1,4 +1,3 @@
-
 <?php echo $this->element('dashboard'); ?>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
@@ -13,7 +12,7 @@
 		<li><?php echo $this->Html->link(__('New Category'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
-
+<?php ?>
 <div class="coupons index">
 	<h2><?php echo __('Coupons'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
@@ -31,6 +30,26 @@
 		
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
+	  <tr class="filters">
+             <?php echo $this->Form->create('Coupon', array('url' => array_merge(array('action' => 'admin_index'), $this->params['pass'])
+		, 'name'=>'Coupon')); ?>
+                <td><?php echo $this -> Form -> input('id', array('type' => 'text', 'div' => false, 'label' => '', 'size' => '1'));?></td>
+                <td><?php echo $this -> Form -> input('store_id', array('type' => 'select', 'option'=>'', 'div' => false, 'label' => '', 'size' => '1'));?></td>
+               
+                <td><?php echo $this -> Form -> input('coupon_code', array('type' => 'text', 'div' => false, 'label' => '', 'size' => '10'));?></td>
+                
+                <td><?php echo $this -> Form -> input('name', array('type' => 'text', 'div' => false, 'label' => '', 'size' => '20'));?></td>
+                <td>&nbsp</td>
+                <td>&nbsp</td>
+                
+                <td>&nbsp</td>
+                <td><?php echo $this -> Form -> input('status', array('label' => '', 'div' => false, 'type' => 'select', 'options' => array('1' => 'Active', '0' => 'In-Active'), 'empty' => 'All'));?></td>
+                <td class="actions"><?php
+                    echo $this -> Html -> link(__('Search'), 'javascript:void(0)', array("onclick" => "Coupon.submit();", "class" => "search-action"));
+                    echo $this -> Form -> end();
+		?></td>
+	</tr>
+	
 	<?php foreach ($coupons as $coupon): ?>
 	<tr>
 		<td><?php echo h($coupon['Coupon']['id']); ?>&nbsp;</td>
@@ -42,8 +61,9 @@
 		<td><?php echo h($coupon['Coupon']['name']); ?>&nbsp;</td>
 		
 		<!--td><?php echo h($coupon['Coupon']['link']); ?>&nbsp;</td-->
-		<td><?php echo h($coupon['Coupon']['start_date']); ?>&nbsp;</td>
-		<td><?php echo h($coupon['Coupon']['end_date']); ?>&nbsp;</td>
+		<td><?php echo $this->Time->format('F jS, Y h:i A', $coupon['Coupon']['start_date']);  ?>&nbsp;</td>
+		<td><?php echo $this->Time->format('F jS, Y h:i A', $coupon['Coupon']['end_date']);  ?>&nbsp;</td>
+		
 		<td>
 			<?php echo $this->Html->link($coupon['Affiliate']['name'], array('controller' => 'affiliates', 'action' => 'view', $coupon['Affiliate']['id'])); ?>
 		</td>

@@ -23,6 +23,15 @@ $cakeDescription = __d('cake_dev', 'LafaLafa');
 <head>
 	<?php echo $this->Html->charset(); ?>
 	
+	 <?php if(isset($description_for_layout)){ ?>
+                 <meta name = "description" content="<?php echo $description_for_layout;?>" />
+    <?php } ?>
+
+    <?php if(isset($keywords_for_layout)){ ?>
+                  <meta name = "keywords" content="<?php echo $keywords_for_layout;?>" />
+    <?php } ?>
+
+
 	<title>
 		<?php echo $cakeDescription ?>:
 		<?php echo $title_for_layout; ?>
@@ -32,14 +41,15 @@ $cakeDescription = __d('cake_dev', 'LafaLafa');
 		
 		echo $this -> Html -> css('cake.generic') . "\n";
 		echo $this -> Html -> css('style') . "\n";
-		
-		#echo $this -> Html -> css('content') . "\n";
-		       
-                
+		echo $this -> Html -> css(array('admin_content')) . "\n";
+		        
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
+		
 		echo $this -> Html -> script('jquery.min') . "\n";
+		echo $this -> Html -> script('jquery.validate.min') . "\n";
+		
 		
 	?>
 </head>
@@ -54,12 +64,7 @@ $cakeDescription = __d('cake_dev', 'LafaLafa');
 			</section>
 		</div>
 				
-		<div class="actions">
-			<h3>Related actions</h3>
-			<ul>
-			<?php echo $this->fetch('sidebar'); ?>
-			</ul>
-		</div>
+		
 		<div id="content">
 		
 			<?php echo $this->Session->flash(); ?>

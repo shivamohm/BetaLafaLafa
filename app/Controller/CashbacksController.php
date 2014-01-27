@@ -83,27 +83,38 @@ class CashbacksController extends AppController {
             if ($this->request->is('post')) {
                
                 $csvFileName	=	$this->request->data['Cashback']['cashbackcsv']['tmp_name'];
+                $csvFileNameCsv	=	$this->request->data['Cashback']['cashbackcsv']['name'];
                 
                 if($this->request->data['Cashback']['cashbackcsv']['type'] != "text/csv"){
                      return $this->Session->setFlash(__('Invalid Formate. Please, try again.'));
                 }
                 
-                if($csvFileName != ""){
+                if($this->request->data['Cashback']['cashbackcsv']['error'] !=0){
+					return $this->Session->setFlash(__($csvFileNameCsv.' File some Error. Please upload correct file again.'));
+				}
+				
+				if($this->request->data['Cashback']['cashbackcsv']['size'] ==0){
+					return $this->Session->setFlash(__($csvFileNameCsv. ' File size is zero. Please upload correct file again'));
+				}
+                
+				$FileNameCsv	=	explode(".",$csvFileNameCsv);
+				if($FileNameCsv[1] != "csv"){
+						 return $this->Session->setFlash(__('Invalid Formate. Please try again.'));
+				}
+				
+                 if($FileNameCsv[1] == "csv"){
                     $messages = $this->Cashback->import($csvFileName);
                        
-                        if(sizeof($messages['messages']) != 0){
-                            foreach($messages['messages'] as $key=>$messages){
-                                $this->Session->setFlash(__(' Cashback has been be saved.'));
-                               # return $this->redirect(array('action' => 'index'));
-                            }
-                        }
-                       
-                        if(sizeof($messages['errors']) != 0){
-                            foreach($messages['errors'] as $keys=>$errors){
-                                #$this->Session->setFlash(__('Line no '.$errors.' coupon could not be saved. Please, try again.'));
-                                $this->Session->setFlash(__($errors. ' Please, try again.'));
-                            }
-                        }
+                       if(count($messages) !=0){
+						 foreach($messages as $keys=>$errValue){
+							 if($keys == '19999'){ 
+								$this->Session->setFlash(__($errValue));
+								return $this->redirect(array('action' => 'index'));
+							}else{
+								$this->_flash(__($errValue, true),'message');
+							}
+						 }
+					 }
                     }else {
                         $this->Session->setFlash(__('Cashback could not be saved. Please, try again.'));
                     }

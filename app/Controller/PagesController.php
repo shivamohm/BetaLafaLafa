@@ -84,4 +84,14 @@ class PagesController extends AppController {
 		
 	}
 	
+	public function tos() {
+		
+		$page = $subpage = $title_for_layout = null;
+
+		
+		$this->set(compact('page', 'subpage', 'title_for_layout'));
+
+		
+	}
+	
 }

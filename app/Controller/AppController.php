@@ -52,5 +52,16 @@ class AppController extends Controller {
 		private function userAuth(){
 			$this->UserAuth->beforeFilter($this);
 		}
+		function _flash($message,$type='message') {
+			$messages = (array)$this->Session->read('Message.multiFlash');
+			$messages[] = array(
+				'message'=>$message,
+				'layout'=>'default',
+				'element'=>'default',
+				'params'=>array('class'=>$type),
+			);
+			
+			$this->Session->write('Message.multiFlash', $messages);
+		}
 	
 }

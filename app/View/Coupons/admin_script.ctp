@@ -1,3 +1,11 @@
+<div id="messages">
+<?php
+   
+    if ($messages = $this->Session->read('Message.multiFlash')) {
+        foreach($messages as $k=>$v) echo $this->Session->flash('multiFlash.'.$k);
+    }
+?>
+</div>
 <?php echo $this->element('dashboard'); ?>
 <script>
 	
@@ -13,8 +21,10 @@
 			}
 		}
 </script>
+
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
+	
 	<ul>
 
 		<li><?php echo $this->Html->link(__('List Coupons'), array('action' => 'index')); ?></li>
@@ -27,21 +37,34 @@
 </div>
 
 <div class="coupons form">
-<?php echo $this->Form->create('Coupon', array('type'=>'file')); ?>
-<?php 
-?>
+
+
 	<fieldset>
 		<legend><?php echo __('Run Coupon Script'); ?></legend>
-		<div class="form-validations"><ol></ol></div>
+		
+		
 	<?php
-		echo $this->Form->input('coupon_type', array('onchange'=>"chnageByCouponType(this.value);",'id'=>'coupon_type','options'=>array(''=>'--select--', 'csv'=>'CSV', 'xml'=>'XML')));
+		#echo $this->Form->input('coupon_type', array('onchange'=>"chnageByCouponType(this.value);",'id'=>'coupon_type','options'=>array(''=>'--select--', 'csv'=>'CSV', 'xml'=>'XML')));
+		echo $this->Form->input('coupon_type', array('id'=>'coupon_type','options'=>array( 'csv'=>'CSV')));
 		
-		echo '<div id="url" style="display:none">'.$this->Form->input('url').'</div>';
+		echo '<div id="url" style="display:none">';
+		echo $this->Form->create('Coupon', array('type'=>'file')); 
+		echo $this->Form->input('url');
+		echo   $this->Form->end(__('Run Script'));
+		echo '</div>';
 		
-		echo '<div id="csv" style="display:none">'. $this->Form->input('couponcsv', array('type'=>'file')).'</div>';
+		
+		echo '<div id="csv" style="display:block">';
+		echo $this->Form->create('Coupon', array('type'=>'file')); 
+		echo $this->Form->input('couponcsv', array('type'=>'file'));
+		  #echo $this->Form->input('name', array('label'=>'Coupon Name'));
+		echo   $this->Form->end(__('Run Script')); 
+		echo '</div>';
 			
 	?>
-	<?php echo '<div id="csv" style="padding-right:364px">'.  $this->Form->end(__('Run Script')).'</div>'; ?>
+	
 	</fieldset>
 
 </div>
+
+

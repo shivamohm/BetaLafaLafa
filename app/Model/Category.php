@@ -24,12 +24,12 @@ class Category extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
-			'isUnique' => array(
+			/*'isUnique' => array(
                             'rule' => 'isUnique',
                             'allowEmpty'=> false,
                             'required' => true,
                             'message' => 'This Brand Name already exists. Please enter a Brand Name'
-              ),
+              ), */
 		),
 		#'parent_id' => array(
 		#	'numeric' => array(

@@ -37,6 +37,14 @@
 	
 	Router::Connect('/admin', array('plugin'=>'Usermgmt','controller'=>'Users', 'action'=>'login'));
 
+Router::connect('/customers', array('plugin' => 'customers', 'controller' => 'customers'));
+Router::connect('/customers/index/*', array('plugin' => 'customers', 'controller' => 'customers'));
+Router::connect('/customers/:action/*', array('plugin' => 'customers', 'controller' => 'customers'));
+Router::connect('/customers/customers/:action/*', array('plugin' => 'customers', 'controller' => 'customers'));
+Router::connect('/customers/login/', array('plugin' => 'customers', 'controller' => 'customers', 'action' => 'login'));
+Router::connect('/customers/logout/', array('plugin' => 'customers', 'controller' => 'customers', 'action' => 'logout'));
+#Router::connect('/register/*', array('plugin' => 'customers', 'controller' => 'customers', 'action' => 'add'));
+
 /**
  * Load all plugin routes. See the CakePlugin documentation on
  * how to customize the loading of plugin routes.

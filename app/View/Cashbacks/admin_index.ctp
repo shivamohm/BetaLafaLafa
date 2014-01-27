@@ -27,8 +27,6 @@
 			<th><?php echo $this->Paginator->sort('payout'); ?></th>
 			<th><?php echo $this->Paginator->sort('discount'); ?></th>
 		
-			
-			<th><?php echo $this->Paginator->sort('no_of_click'); ?></th>
 			<th><?php echo $this->Paginator->sort('type'); ?></th>
 			<th><?php echo $this->Paginator->sort('status'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -38,13 +36,13 @@
 		, 'name'=>'Cashback')); ?>
                 <td><?php echo $this -> Form -> input('id', array('type' => 'text', 'div' => false, 'label' => '', 'size' => '1'));?></td>
                 <td><?php echo $this -> Form -> input('store_id', array('type' => 'text', 'div' => false, 'label' => '', 'size' => '10'));?></td>
-                <td>&nbsp</td>
+                <td>&nbsp;</td>
                 <td><?php echo $this -> Form -> input('name', array('type' => 'text', 'div' => false, 'label' => '', 'size' => '20'));?></td>
-                <td>&nbsp</td>
-                <td>&nbsp</td>
-                <td></td>
-                <td>&nbsp</td>
-                <td><?php echo $this -> Form -> input('status', array('label' => '', 'div' => false, 'type' => 'select', 'options' => array('1' => 'Active', '0' => 'In-Active'), 'empty' => 'All'));?></td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                 <td><?php echo $this -> Form -> input('status', array('label' => '', 'div' => false, 'type' => 'select', 'options' => array('1' => 'Active', '0' => 'In-Active'), 'empty' => 'All'));?></td>
+                 
                 <td class="actions"><?php
                     echo $this -> Html -> link(__('Search'), 'javascript:void(0)', array("onclick" => "Cashback.submit();", "class" => "search-action"));
                     echo $this -> Form -> end();
@@ -66,7 +64,7 @@
 		<td><?php echo h($cashback['Cashback']['discount']); ?>&nbsp;</td>
 		
 		
-		<td><?php echo h($cashback['Cashback']['no_of_click']); ?>&nbsp;</td>
+		
 		<td><?php echo h($cashback['Cashback']['type']); ?>&nbsp;</td>
 		<!--td><?php echo h($cashback['Cashback']['status']); ?>&nbsp;</td-->
                 <td><?php if($cashback['Cashback']['status'] == 1){ echo "Active";}else{ echo "In-Active";} ?>&nbsp;</td>
