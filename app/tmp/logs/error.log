@@ -1,0 +1,194 @@
+2014-01-31 06:04:22 Error: [MissingDatasourceConfigException] The datasource configuration "default" was not found in database.php
+Exception Attributes: array (
+  'config' => 'default',
+)
+Request URL: /BetaLafaLafa/
+Stack Trace:
+#0 /var/www/BetaLafaLafa/lib/Cake/Model/ConnectionManager.php(91): ConnectionManager::_getConnectionObject('default')
+#1 /var/www/BetaLafaLafa/lib/Cake/Model/Model.php(3471): ConnectionManager::getDataSource('default')
+#2 /var/www/BetaLafaLafa/lib/Cake/Model/Model.php(1126): Model->setDataSource('default')
+#3 /var/www/BetaLafaLafa/lib/Cake/Model/Model.php(3493): Model->setSource('user_group_perm...')
+#4 /var/www/BetaLafaLafa/lib/Cake/Model/Model.php(2897): Model->getDataSource()
+#5 /var/www/BetaLafaLafa/lib/Cake/Model/Model.php(2869): Model->_readDataSource('all', Array)
+#6 /var/www/BetaLafaLafa/app/Plugin/Usermgmt/Model/UserGroup.php(122): Model->find('all', Array)
+#7 /var/www/BetaLafaLafa/app/Plugin/Usermgmt/Model/UserGroup.php(87): UserGroup->getPermissions(3, false)
+#8 /var/www/BetaLafaLafa/app/Plugin/Usermgmt/Model/UserGroup.php(104): UserGroup->isUserGroupAccess('pages', 'index', 3)
+#9 /var/www/BetaLafaLafa/app/Plugin/Usermgmt/Controller/Component/UserAuthComponent.php(72): UserGroup->isGuestAccess('pages', 'index')
+#10 /var/www/BetaLafaLafa/app/Controller/AppController.php(44): UserAuthComponent->beforeFilter(Object(PagesController), Array)
+#11 [internal function]: AppController->beforeFilter(Object(CakeEvent))
+#12 /var/www/BetaLafaLafa/lib/Cake/Event/CakeEventManager.php(247): call_user_func(Array, Object(CakeEvent))
+#13 /var/www/BetaLafaLafa/lib/Cake/Controller/Controller.php(674): CakeEventManager->dispatch(Object(CakeEvent))
+#14 /var/www/BetaLafaLafa/lib/Cake/Routing/Dispatcher.php(182): Controller->startupProcess()
+#15 /var/www/BetaLafaLafa/lib/Cake/Routing/Dispatcher.php(160): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#16 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#17 /var/www/BetaLafaLafa/index.php(41): require('/var/www/BetaLa...')
+#18 {main}
+2014-01-31 06:04:22 Error: [MissingDatasourceConfigException] The datasource configuration "default" was not found in database.php
+Exception Attributes: array (
+  'config' => 'default',
+)
+Request URL: /BetaLafaLafa/
+Stack Trace:
+#0 /var/www/BetaLafaLafa/lib/Cake/Model/ConnectionManager.php(91): ConnectionManager::_getConnectionObject('default')
+#1 /var/www/BetaLafaLafa/lib/Cake/Model/Model.php(3471): ConnectionManager::getDataSource('default')
+#2 /var/www/BetaLafaLafa/lib/Cake/Model/Model.php(1126): Model->setDataSource('default')
+#3 /var/www/BetaLafaLafa/lib/Cake/Model/Model.php(3493): Model->setSource('user_group_perm...')
+#4 /var/www/BetaLafaLafa/lib/Cake/Model/Model.php(2897): Model->getDataSource()
+#5 /var/www/BetaLafaLafa/lib/Cake/Model/Model.php(2869): Model->_readDataSource('all', Array)
+#6 /var/www/BetaLafaLafa/app/Plugin/Usermgmt/Model/UserGroup.php(122): Model->find('all', Array)
+#7 /var/www/BetaLafaLafa/app/Plugin/Usermgmt/Model/UserGroup.php(87): UserGroup->getPermissions(3, false)
+#8 /var/www/BetaLafaLafa/app/Plugin/Usermgmt/Model/UserGroup.php(104): UserGroup->isUserGroupAccess('pages', 'index', 3)
+#9 /var/www/BetaLafaLafa/app/Plugin/Usermgmt/Controller/Component/UserAuthComponent.php(72): UserGroup->isGuestAccess('pages', 'index')
+#10 /var/www/BetaLafaLafa/app/Controller/AppController.php(44): UserAuthComponent->beforeFilter(Object(PagesController), Array)
+#11 [internal function]: AppController->beforeFilter(Object(CakeEvent))
+#12 /var/www/BetaLafaLafa/lib/Cake/Event/CakeEventManager.php(247): call_user_func(Array, Object(CakeEvent))
+#13 /var/www/BetaLafaLafa/lib/Cake/Controller/Controller.php(674): CakeEventManager->dispatch(Object(CakeEvent))
+#14 /var/www/BetaLafaLafa/lib/Cake/Routing/Dispatcher.php(182): Controller->startupProcess()
+#15 /var/www/BetaLafaLafa/lib/Cake/Routing/Dispatcher.php(160): Dispatcher->_invoke(Object(PagesController), Object(CakeRequest), Object(CakeResponse))
+#16 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#17 /var/www/BetaLafaLafa/index.php(41): require('/var/www/BetaLa...')
+#18 {main}
+2014-01-31 16:45:30 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/img/brix-logo.gif
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-01-31 16:45:35 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/js/jquery.tipTip.minified.js
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-01-31 16:45:35 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/img/brix-logo.gif
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-01-31 16:45:43 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/js/jquery.tipTip.minified.js
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-01-31 16:45:43 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/img/brix-logo.gif
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-01-31 16:45:50 Error: [Exception] Facebook needs the CURL PHP extension.
+Request URL: /BetaLafaLafa/customers
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/Plugin/Facebook/Vendor/Facebook.php(18): require_once()
+#1 /var/www/BetaLafaLafa/lib/Cake/Core/App.php(565): include('/var/www/BetaLa...')
+#2 [internal function]: App::load('Facebook')
+#3 /var/www/BetaLafaLafa/app/Plugin/Facebook/Lib/FB.php(29): spl_autoload_call('Facebook')
+#4 /var/www/BetaLafaLafa/app/Plugin/Facebook/Lib/FB.php(21): FB->__initInstance()
+#5 /var/www/BetaLafaLafa/app/Plugin/Facebook/Controller/Component/ConnectComponent.php(93): FB->__construct()
+#6 [internal function]: ConnectComponent->initialize(Object(CustomersController))
+#7 /var/www/BetaLafaLafa/lib/Cake/Utility/ObjectCollection.php(132): call_user_func_array(Array, Array)
+#8 [internal function]: ObjectCollection->trigger(Object(CakeEvent))
+#9 /var/www/BetaLafaLafa/lib/Cake/Event/CakeEventManager.php(247): call_user_func(Array, Object(CakeEvent))
+#10 /var/www/BetaLafaLafa/lib/Cake/Controller/Controller.php(674): CakeEventManager->dispatch(Object(CakeEvent))
+#11 /var/www/BetaLafaLafa/lib/Cake/Routing/Dispatcher.php(182): Controller->startupProcess()
+#12 /var/www/BetaLafaLafa/lib/Cake/Routing/Dispatcher.php(160): Dispatcher->_invoke(Object(CustomersController), Object(CakeRequest), Object(CakeResponse))
+#13 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-01-31 16:45:50 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/img/brix-logo.gif
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-01-31 16:47:26 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/img/brix-logo.gif
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-01-31 16:47:40 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/img/brix-logo.gif
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-06 16:00:55 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/img/brix-logo.gif
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-06 16:00:58 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/js/jquery.tipTip.minified.js
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-06 16:00:58 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/img/brix-logo.gif
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-06 16:00:58 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/img/brix-logo.gif
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-06 16:01:01 Error: [MissingControllerException] Controller class JsController could not be found.
+Exception Attributes: array (
+  'class' => 'JsController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/js/jquery.tipTip.minified.js
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-02-06 16:01:01 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /BetaLafaLafa/img/brix-logo.gif
+Stack Trace:
+#0 /var/www/BetaLafaLafa/app/webroot/index.php(108): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}

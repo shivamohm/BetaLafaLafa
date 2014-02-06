@@ -65,9 +65,6 @@
  
  
  
- //da dsakjasd sadsaasadsdsadsadsadasasa
- 
- 
 class DATABASE_CONFIG {
 
 	public $default = array(
